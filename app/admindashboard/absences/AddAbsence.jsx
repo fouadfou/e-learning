@@ -1,0 +1,212 @@
+import React, { useState, useEffect } from 'react';
+import { Select, SelectItem, Button, Input } from '@nextui-org/react';
+import { supabaseClient } from '@/app/utils/supabaseClient';
+import { DatePicker } from 'antd';
+
+const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
+
+
+  const [num_student, setNum_student] = useState('');
+  const [selectedStudent, setSelectedStudent] = useState('');
+  const [errorStudent, setErrorStudent] = useState(false);
+  const [timeSelected, setTimeSelected] = useState('');
+
+  const [selectedMatiere, setSelectedMatiere] = useState('');
+  const [matieres, setMatieres] = useState([]);
+
+  const [selectedTeacher, setSelectedTeacher] = useState('');
+  const [teachers, setTeachers] = useState([]);
+
+
+  useEffect(() => {
+    const fetchMatiers = async () => {
+      try {
+        const token = await getToken({ template: 'supabase' });
+        const supabase = await supabaseClient(token);
+        const { data, error } = await supabase.from('matiere').select('*');
+
+        setMatieres(data);
+      } catch (error) {
+        console.error('Error fetching matieres:', error.message);
+      }
+    };
+
+    fetchMatiers();
+  }, [getToken]);
+
+
+  useEffect(() => {
+    const fetchStudentByNumber = async () => {
+      const trimmedStudentNumber = num_student.trim(); // Remove spaces
+      if (trimmedStudentNumber === '') return;
+  
+      try {
+        const token = await getToken({ template: 'supabase' });
+        const supabase = await supabaseClient(token);
+        const { data: fetchStudent, error: errorfetchedStudent } = await supabase
+          .from('eleve')
+          .select('user_id , users(nom,prenom), class(id)')
+          .eq('num_eleve', trimmedStudentNumber)
+          .single();
+  
+  
+        if (errorfetchedStudent || !fetchStudent) {
+          setErrorStudent(true);
+          setSelectedStudent(null);
+          return;
+        }
+  
+        const CombinationObjects = {
+          user_id: fetchStudent.user_id,
+          nom: fetchStudent.users.nom,
+          prenom: fetchStudent.users.prenom,
+          class_id: fetchStudent.class.id
+        };
+  
+        setErrorStudent(false);
+        setSelectedStudent(CombinationObjects);
+  
+      } catch (error) {
+        console.error('Error fetching student:', error.message);
+        setErrorStudent(true);
+        setSelectedStudent(null);
+      }
+    };
+  
+    fetchStudentByNumber();
+  }, [num_student, getToken]);
+
+
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      try {
+        const token = await getToken({ template: 'supabase' });
+        const supabase = await supabaseClient(token);
+        const { data, error } = await supabase
+          .from('matiere_ensg')
+          .select('ensg_id , ensg(user_id , users(nom, prenom))')
+          .eq('matiere_id', selectedMatiere.id);
+
+        const CombinationObjects = data.map(item => ({
+          ensg_id: item.ensg_id,
+          nom: item.ensg.users.nom,
+          prenom: item.ensg.users.prenom,
+        }));
+
+        
+        setTeachers(CombinationObjects);
+      } catch (error) {
+        console.error('Error fetching teacher:', error.message);
+      }
+    };
+
+    selectedMatiere !== '' && fetchTeachers();
+  }, [selectedMatiere, getToken]);
+
+  const addAbsence = async e => {
+    e.preventDefault();
+    try {
+      const token = await getToken({ template: 'supabase' });
+      const supabase = await supabaseClient(token);
+      const { data, error } = await supabase
+        .from('absence')
+        .insert({
+          eleve_id: selectedStudent.user_id,
+          matiere_id: selectedMatiere.id,
+          ensg_id: selectedTeacher.id,
+          date_abs: timeSelected,
+          class_id: selectedStudent.class_id,
+          /* description:`Votre enfant, ${selectedStudent.nom} ${selectedStudent.prenom}, est absent lors du cours de ${selectedMatiere.matiere_name} 
+          enseigné par M.${selectedTeacher.nom} ${selectedTeacher.prenom} ` */
+        });
+      
+
+
+        setFatchAbsencesBool(prevState => !prevState)
+
+      // Reset the form
+      setNum_student('');
+      setSelectedStudent('');
+      setErrorStudent(false);
+      setTimeSelected('');
+      setSelectedMatiere('');
+      setSelectedTeacher('');
+
+
+    } catch (error) {
+      console.error('Error add absence:', error.message);
+    }
+  };
+  return (
+    <div >
+          <form className="flex flex-wrap items-center gap-4" onSubmit={addAbsence}>
+        <Input
+          size="sm"
+          value={num_student}
+          onChange={e => setNum_student(e.target.value)}
+          radius="lg"
+          label="Student number"
+          type="text"
+          labelPlacement="inside"
+          className="w-fit"
+          isRequired
+        />
+        <DatePicker showTime onChange={(_, dateStr) => setTimeSelected(dateStr)} />
+        <Select radius="lg" size="sm" label="Select a matiere" className="flex-1 min-w-[12rem]" isRequired>
+          {matieres.map((matiere, index) => (
+            <SelectItem
+              isRequired
+              className="whitespace-nowrap"
+              onClick={() => setSelectedMatiere({id:matiere.id ,matiere_name:matiere.matiere_name })}
+              key={index}
+              value={selectedMatiere.matiere_id}
+            >
+              {matiere.matiere_name}
+            </SelectItem>
+          ))}
+        </Select>
+        <Select
+          isRequired
+          isDisabled={selectedMatiere === ''}
+          radius="lg"
+          size="sm"
+          label="Select a teacher"
+          className="flex-1 min-w-[12rem]"
+        >
+          {teachers.map((teacher, index) => (
+            <SelectItem
+              textValue={`${teacher.nom} ${teacher.prenom}`}
+              className="whitespace-nowrap"
+              onClick={() => setSelectedTeacher({id:teacher.ensg_id ,nom:teacher.nom , prenom:teacher.prenom})}
+              key={index}
+            >
+              {teacher.nom} {teacher.prenom}
+            </SelectItem>
+          ))}
+        </Select>
+        <Button className="bg-primaryColor text-white" type="submit">
+          {' '}
+          Add absence
+        </Button>
+      </form>
+
+      {selectedStudent !== null && num_student !== '' && (
+        <div className="flex w-fit gap-6 mt-5 border-[1px] rounded-2xl p-2 px-3">
+          <p>
+            <span className="font-medium text-sm">Nom :</span> {selectedStudent.nom}
+          </p>
+          <p>
+            <span className="font-medium text-sm">Prénom :</span> {selectedStudent.prenom}
+          </p>
+        </div>
+      )}
+      {errorStudent && num_student !== '' && (
+        <p className="text-red-600 w-fit mt-5 border-[1px] rounded-2xl p-2 px-3">
+          We couldn't find a student with this number.
+        </p>
+      )}
+    </div>
+  )
+}
+
+export default AddAbsence
