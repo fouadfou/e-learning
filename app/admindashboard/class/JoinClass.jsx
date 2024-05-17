@@ -94,7 +94,7 @@ const JoinClass = ({classes,setClasses}) => {
           onChange={(e) => setNum_student(e.target.value)}
           radius="lg"
           size="sm"
-          label="Student number"
+          label="Numéro d'élève"
           type="text"
           labelPlacement="inside"
           className='w-fit'
@@ -105,7 +105,7 @@ const JoinClass = ({classes,setClasses}) => {
       <Select
   radius="lg"
   size="sm"
-  label="Select a class"
+  label="Sélectionnez une classe"
   className="max-w-xs"
 >
   {classes.map((classe, index) => (
@@ -120,7 +120,7 @@ const JoinClass = ({classes,setClasses}) => {
     </SelectItem>
   ))}
 </Select>
-        <Button onClick={()=> joinclass()} className='bg-primaryColor text-white' >Add student to Class</Button>
+        <Button onClick={()=> joinclass()} className='bg-primaryColor text-white' >Ajouter un élève à la classe</Button>
     </div>
   
   {(selectedStudent !==null && num_student!=='') && (
@@ -134,7 +134,10 @@ const JoinClass = ({classes,setClasses}) => {
     </div>
   )}
 
-{(errorStudent && num_student !== "") && <p className="text-red-600 w-fit mt-5 border-[1px] rounded-2xl p-2 px-3">We couldn't find a student with this number.</p>}
+{(errorStudent && num_student !== "") && 
+  <p className="text-red-600 w-fit mt-5 border-[1px] rounded-2xl p-2 px-3">
+    Nous n'avons pas trouvé d'étudiant avec ce numéro
+  </p>}
 
 </div>
   )

@@ -63,16 +63,16 @@ const AddSubject = ({ getToken, matieres, setMatieres }) => {
           onChange={(e) => setMatiereName(e.target.value)}
           radius="lg"
           size="sm"
-          label="Matiere name"
+          label="Nom de matiere"
           type="text"
           labelPlacement="inside"
           className='w-fit'
         />
-        <Button className='bg-primaryColor text-white' onClick={addMatiere}>Addd Subject</Button>
+        <Button className='bg-primaryColor text-white' onClick={addMatiere}>Ajouter une matiere</Button>
       </div>
       
       <div>
-        <h2 className='font-medium mb-3 ml-1'> Matiers List</h2>
+        <h2 className='font-medium mb-3 ml-1'> Liste des matières </h2>
        {  <ul className='border-[1px] rounded-lg'>
           {matieres.map((matiere, index) => (
             <li className='border-b-[1px] p-3 text-sm flex gap-6' key={index}>

@@ -32,7 +32,7 @@
 export const navBarList = [
   {
     id: 1001,
-    title: "Home",
+    title: "Accueil",
     link: "/",
   },
   {
@@ -43,12 +43,12 @@ export const navBarList = [
   
   {
     id: 1003,
-    title: "About",
+    title: "À propos",
     link: "/about",
   },
   {
     id: 1004,
-    title: "Contact",
+    title: "Contactez-nous",
     link: "/contact",
   },
 ];

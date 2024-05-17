@@ -122,13 +122,13 @@ const Navbar = () => {
             
             <div className="flex w-full justify-end items-center ml-1 lg:ml-0 ">
 
-              <div className="flex   items-center justify-between pl-1 py-1 px-3 w-full lg:w-[15rem] h-full rounded-full mr-2  hover:bg-[#e1e1e1] bg-[#f1f1f1] bg-grayBg">
+              {/* <div className="flex   items-center justify-between pl-1 py-1 px-3 w-full lg:w-[15rem] h-full rounded-full mr-2  hover:bg-[#e1e1e1] bg-[#f1f1f1] bg-grayBg">
                 <div className="bg-primaryColor p-[0.35rem] rounded-full">
                 <IoIosSearch className=" text-white rounded-md max-h-full" />
                 
                 </div>
                 <input type="text" className=" w-[88%] ml-2 outline-none bg-transparent text-sm placeholder:text-[12px]" placeholder='Search people, pages,or groupes' />
-              </div>
+              </div> */}
 
 
 
@@ -148,14 +148,14 @@ const Navbar = () => {
                   <Link href="/sign-in" onClick={()=>setIsOpen(false)} >
                     <div className="flex text-[#565656]   hover:bg-grayBg items-center gap-3 p-2  px-3 rounded-lg ">
                       <TbLogin2 className="text-[#BCBCBC]" />
-                      <p className="text-[13px]">Login</p>
+                      <p className="text-[13px]">Se connecter</p>
                       
                     </div>
                   </Link>
                   <Link href="/sign-up" onClick={()=>setIsOpen(false)} >
                     <div  className="flex text-[#565656]  hover:bg-grayBg  items-center gap-3 p-2 px-3  rounded-lg ">
                       <FiUserPlus className="text-[#BCBCBC] "/>
-                      <p className="text-[13px]">SignUp</p>
+                      <p className="text-[13px]">S'inscrire</p>
                       
                     </div>
                   </Link>
@@ -182,24 +182,27 @@ const Navbar = () => {
                 avatarProps={{
                   src: user?.imageUrl,
                 }}
+                {...{
+                  locale: 'fr', // for French
+                }}
               />
               
 
               {userRole === "Admin" && (
                 <Link  onClick={()=>setIsOpen(false)} href="/admindashboard"  className="flex cursor-pointer hover:bg-grayBg p-3 rounded-lg  items-center gap-4 text-[13px] tracking-wide text-[#565656]">
                 <MdSpaceDashboard  className="text-[14px] text-[#BCBCBC]" />
-                  <span>Admin Page</span>
+                  <span>Page d'administration</span>
                 </Link>
               )
               
               }
               <div onClick={() => openUserProfile()} className="flex cursor-pointer hover:bg-grayBg p-3 rounded-lg  items-center gap-4 text-[13px] tracking-wide text-[#565656]">
                  <RiSettings3Fill className="text-[14px] text-[#BCBCBC]" />
-                <span>Manage Account</span>
+                <span>Gérer son compte</span>
               </div>
               <div onClick={() => signOut(() => router.push('/'))}  className="flex cursor-pointer  items-center hover:bg-grayBg p-3 rounded-lg gap-4 text-[13px] tracking-wide text-[#565656]">
               <HiLogout className="text-[14px] text-[#BCBCBC]" />
-              <span>Sign out</span>
+              <span>se déconnecter</span>
 
               </div>
         </div>

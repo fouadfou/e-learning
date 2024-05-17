@@ -39,9 +39,9 @@ import { deleteUser, getUsers } from '@/app/utils/userRequestes';
 
  const columns = [
     {name: "ID", uid: "id", sortable: true},
-    {name: "Username", uid: "Username", sortable: true},
-    {name: "First name", uid: "First name"},
-    {name: "Last name", uid: "Last name"},
+    {name: "Nom d'utilisateur", uid: "Username", sortable: true},
+    {name: "nom", uid: "Last name"},
+    {name: "prénom", uid: "First name"},
     {name: "Role", uid: "Role"},
     {name: "Actions", uid: "Actions"},
   
@@ -49,9 +49,9 @@ import { deleteUser, getUsers } from '@/app/utils/userRequestes';
 
   const RoleOptions = [
     {name: "Admin", color:"danger" , uid: "Admin"},
-    {name: "Teacher", color:"success", uid: "Teacher"},
+    {name: "Enseignante", color:"success", uid: "Teacher"},
     {name: "Parent", color:"secondary", uid: "Parent"},
-    {name: "Student", color:"warning", uid: "Student"},
+    {name: "Élève", color:"warning", uid: "Student"},
     
   ];
 
@@ -168,18 +168,20 @@ const TableData = ({children}) => {
           <p className="text-bold text-small capitalize">{user?.username}</p>
         );
 
-        case "First name":
-        return (
-          <p className="text-bold text-small capitalize">{user.nom}</p>
-        );
         case "Last name":
+          return (
+            <p className="text-bold text-small capitalize">{user.nom}</p>
+          );
+
+        case "First name":
         return (
           <p className="text-bold text-small capitalize">{user.prenom}</p>
         );
+       
      
       case "Role":
         return (
-          <Chip className="capitalize" color={ RoleOptions.find(option => option.name === user.role)?.color || "defaultColor"} size="sm" variant="flat">
+          <Chip className="capitalize" color={ RoleOptions.find(option => option.uid === user.role)?.color || "defaultColor"} size="sm" variant="flat">
             {user.role}
           </Chip>
         );
@@ -232,7 +234,7 @@ const TableData = ({children}) => {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by Firstname , Lastname"
+            placeholder="Search by nom , prenom"
             startContent={<CiSearch />}
             value={filterValue}
             onClear={() => onClear()}
@@ -288,7 +290,7 @@ const TableData = ({children}) => {
           </div>
         </div>
         
-          <span className="text-default-400 text-small">Total {users.length} users</span>
+          <span className="text-default-400 text-small">Total {users.length} utilisateurs</span>
           
         
       </div>
@@ -308,7 +310,7 @@ const TableData = ({children}) => {
         <span className=" text-small text-default-400">
           {selectedKeys === "all"
             ? "All items selected"
-            : `${selectedKeys.size} of ${filteredItems.length} selected`}
+            : `${selectedKeys.size} sur ${filteredItems.length} sélectionnés`}
         </span>
         <Pagination
           classNames={{
@@ -323,7 +325,7 @@ const TableData = ({children}) => {
           onChange={setPage}
         />
         <Button color="danger" className="" size="sm" variant="flat"  >
-            Delete selections
+              Supprimer les sélections
         </Button>
       </div>
     );

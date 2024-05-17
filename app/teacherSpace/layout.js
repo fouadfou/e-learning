@@ -18,12 +18,12 @@ import {
 
 const listElements = [
     {
-        name: 'Home',
+        name: 'Accueil',
         icon: <GoHomeFill />,
         link: "/"
     },
     {
-        name: 'HomeWork',
+        name: 'Devoirs',
         icon: <BsFileTextFill />,
         link: "/devoir"
     },

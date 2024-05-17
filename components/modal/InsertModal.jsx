@@ -9,9 +9,9 @@ import { FaEye ,FaEyeSlash  } from "react-icons/fa";
 
 
 const roles = [
-  { label: "Teacher", value: "Teacher" },
+  { label: "Élève", value: "Teacher" },
   { label: "Parent", value: "Parent" },
-  { label: "Student", value: "Student" },
+  { label: "enseignante", value: "Student" },
 ];
 
 
@@ -137,7 +137,7 @@ const resetStates =()=> {
   return (
     <>
       <Button  onPress={onOpen} className='bg-primaryColor text-white' endContent={<GoPlus />}>
-        Add User
+          Ajouter un utilisateur
       </Button>
       <Modal 
         onClose ={()=>setRole("")}
@@ -148,29 +148,30 @@ const resetStates =()=> {
       >
         <ModalContent>
           <form onSubmit={handleSubmit}>
-            <ModalHeader className="flex flex-col gap-1">User informations</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1">Informations de l'utilisateur</ModalHeader>
             <ModalBody>
               <div className='flex gap-3'>
-                <Input
-                  key="firstname"
+              <Input
+                  key="nom"
                   type="text"
-                  label="LastName"
-                  labelPlacement="inside"
-                  value={firstname}
-                  onChange={(e) => setFirstname(e.target.value)}
-                isRequired
-
-                />
-                <Input
-                  key="lastname"
-                  type="text"
-                  label="FirstName"
+                  label="Nom"
                   labelPlacement="inside"
                   value={lastname}
                   onChange={(e) => setLastname(e.target.value)}
                 isRequired
 
                 />
+                <Input
+                  key="prenom"
+                  type="text"
+                  label="Prenom"
+                  labelPlacement="inside"
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.target.value)}
+                isRequired
+
+                />
+               
               </div>
               <Select 
                 label="Select a role" 
@@ -196,14 +197,14 @@ const resetStates =()=> {
               />}
               {username !== '' && (
                 usernameTaken ? (
-                  <p className="text-danger text-[12px] ml-2">Username is already taken. Please choose another one.</p>
+                  <p className="text-danger text-[12px] ml-2">Nom d'utilisateur déjà pris. Veuillez en choisir un autre.</p>
                 ) : (
-                  <p className="text-success text-[12px] ml-2">Username is available</p>
+                  <p className="text-success text-[12px] ml-2">Nom d'utilisateur disponible</p>
                 )
               )}
               {role !== "Student" && <Input
-                key="password"
-                label="Password"
+                key="mot de passe"
+                label="mot de passe"
                 labelPlacement="inside"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

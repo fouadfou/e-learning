@@ -154,15 +154,16 @@ const AddClass = ({classes,setClasses}) => {
             onChange={(e) => setNewClass(e.target.value)}
             radius="lg"
             size="sm"
-            label="Class name"
+            label="Nom de class"
             type="text"
+            className='w-auto'
             labelPlacement="inside"
         />
 
         <Select 
          radius ="lg"
          size='sm'
-        label="Select an niveau" 
+        label="Sélectionnez un niveau" 
         className="max-w-xs" 
       >
         {niveaux.map((niveau , index) => (
@@ -186,14 +187,14 @@ const AddClass = ({classes,setClasses}) => {
         ))}
       </Select>
  */}
-      <Button onClick={()=> addClass()} className='bg-primaryColor text-white'> Add class </Button>
+      <Button onClick={()=> addClass()} className='bg-primaryColor text-white'> Ajouter une classe </Button>
 
       
       
     </div>
 
 <div>
-    <h2 className='font-medium mb-3 ml-1'>Classes : </h2>
+    <h2 className='font-medium mb-3 ml-1'>Les classes : </h2>
 
      <ul className='border-[1px] rounded-lg'>
         {classes.map((classe, index) => (

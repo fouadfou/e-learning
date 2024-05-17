@@ -16,6 +16,7 @@ const Page = () => {
 
 
   useEffect(() => {
+
     const fetchStudentByNumber = async () => {
       const trimmedStudentNumber = num_student.trim(); // Remove spaces
       if (trimmedStudentNumber === '') return;
@@ -126,6 +127,7 @@ const Page = () => {
 
   return (
     <div className="flex-1 p-8 flex flex-col gap-4">
+      
       <h2 className="text-xl font-semibold">Connect Parent with Child</h2>
 
       <div className="flex flex-col gap-3">
@@ -134,7 +136,7 @@ const Page = () => {
           onChange={(e) => setNum_student(e.target.value)}
           radius="lg"
           size="sm"
-          label="Student number"
+          label="Numéro d'étudiant"
           type="text"
           labelPlacement="inside"
         />
@@ -159,7 +161,7 @@ const Page = () => {
           onChange={(e) => setParentUsername(e.target.value)}
           radius="lg"
           size="sm"
-          label="Parent username"
+          label="Nom d'utilisateur du parent"
           type="text"
           labelPlacement="inside"
         />
@@ -175,10 +177,10 @@ const Page = () => {
               </div>
             )}
 
-        {(errorParent && parentUsername !== '') && <p className="text-red-600">We couldn't find a parent with this username.</p>}
+        {(errorParent && parentUsername !== '') && <p className="text-red-600">Nous n'avons pas trouvé de parent avec ce nom d'utilisateur</p>}
       </div>
 
-      <Button onClick={handleSubmit} className="bg-primaryColor text-white">Family Bond</Button>
+      <Button onClick={handleSubmit} className="bg-primaryColor text-white">Relier le parent et l'enfant</Button>
     </div>
   );
 };

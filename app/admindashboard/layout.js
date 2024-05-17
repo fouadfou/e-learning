@@ -15,6 +15,8 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { FaBookOpen } from "react-icons/fa";
 import { RiParentFill } from "react-icons/ri";
 import { GiKnapsack } from "react-icons/gi";
+import { MdOutlineAccessTimeFilled } from "react-icons/md";
+import { VscSaveAs } from "react-icons/vsc";
 
 import { redirect } from "next/navigation";
 
@@ -27,33 +29,40 @@ import {
 
 const listElements = [
   {
-      name: 'Home',
+      name: 'Accueil',
       icon: <GoHomeFill />,
       link: "/"
   },
   {
-      name: 'Users',
+      name: 'Utilisateurs',
       icon: <FaUser />,
       link: "/users"
   },
 
   {
-    name: 'Parents/Childrens',
+    name: 'Parents/Enfants',
     icon: <RiParentFill  />,
     link: "/parentsChildrens"
 },
   {
-    name: 'Year',
+    name: 'Années',
     icon: <FaCalendarAlt  />,
     link: "/year"
 },
 {
-  name: 'Trimester',
+  name: 'Trimestres',
   icon: <MdOutlineFormatListNumberedRtl   />,
   link: "/trimester"
 },
+
+{
+  name: 'emplois du temps',
+  icon: <MdOutlineAccessTimeFilled   />,
+  link: "/timetables"
+},
+
   {
-      name: 'Level',
+      name: 'Niveaux',
       icon: <SiOpslevel />,
       link: "/level"
   },
@@ -63,7 +72,7 @@ const listElements = [
     link: "/class"
 },
 {
-  name: 'Subject',
+  name: 'Matières',
   icon: <FaBookOpen />,
   link: "/subject"
 },
@@ -71,6 +80,11 @@ const listElements = [
   name: 'Absences',
   icon: <GiKnapsack />,
   link: "/absences"
+},
+{
+  name: 'Enregistrements',
+  icon: <VscSaveAs />,
+  link: "/records"
 },
 ];
 

@@ -106,9 +106,9 @@ const Email = () => {
     return (
         <div className='border rounded-xl p-6 mx-11 flex flex-col gap-4 mt-10'>
             {!fetchedEmail ?
-                <p className='font-medium text-red-500'>Attention: Please provide your email address if you would like to receive notifications about your child's attendance.</p>
+                <p className='font-medium text-red-500'>Attention : Veuillez indiquer votre adresse e-mail si vous souhaitez recevoir des notifications concernant la présence de votre enfant.</p>
                 :
-                <p className='font-medium text-green-600'>You will now receive notifications about your child's attendance.</p>
+                <p className='font-medium text-green-600'>Vous recevrez désormais des notifications concernant la présence de votre enfant.</p>
             }
 
             <form className='flex flex-wrap gap-4 items-center' onSubmit={addEmail}>
@@ -122,7 +122,7 @@ const Email = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <Button type='submit' className='bg-primaryColor text-white'>Add email</Button>
+                <Button type='submit' className='bg-primaryColor text-white'>Ajouter un e-mail</Button>
             </form>
 
             {fetchedEmail &&

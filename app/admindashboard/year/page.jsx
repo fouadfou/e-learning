@@ -89,7 +89,7 @@ const page = () => {
    
     
   return (
-    <div className='p-8 flex flex-col gap-4'>
+    <div className='p-8 w-full flex flex-col gap-4'>
 
        {/* 
         <p className='font-medium '>Select School Year </p>
@@ -100,7 +100,7 @@ const page = () => {
         <Input
             isClearable
             className="w-full sm:max-w-[60%]"
-            placeholder="Search by year"
+            placeholder="Recherche par année"
             startContent={<CiSearch />}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
@@ -111,6 +111,8 @@ const page = () => {
 
         <DatePicker
             picker="year"
+            placeholder="Année"
+            width={300}
              onChange={(dateString) => setSelectedYear(dateString ? new Date(dateString).getFullYear() : '')}  // Update selectedYear state with the chosen year
         />
 
@@ -122,12 +124,12 @@ const page = () => {
             className='bg-primaryColor text-white'
             endContent={<GoPlus/>}
         >
-            Add Year
+            Ajouter une année
         </Button>
     
         </div>
         
-        <h3 className='font-medium mt-6'>Manage scholl years table</h3>
+        <h3 className='font-medium mt-6'>Gérer le tableau des années scolaires</h3>
 
         <div className='border-t-[1px]  '>
 

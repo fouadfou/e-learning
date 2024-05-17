@@ -63,18 +63,20 @@ const Yearelement = ({year , setYears , index , getToken}) => {
       >
         {year.annee}
       </Chip>
-            <div className='flex items-center' >
+           
 
             <DatePicker
             picker="year"
+            placeholder="Année"
+            width={300}
             onChange={(dateString) => setUpdate_Year(dateString ? new Date(dateString).getFullYear() : '')} // Update selectedYear state with the chosen year
             />
 
-                <Button isDisabled={update_Year === ''} onClick={() => updateYearFunction(year.id, update_Year)} className="bg-transparent" isIconOnly>
+           
+
+            <Button isDisabled={update_Year === ''} onClick={() => updateYearFunction(year.id, update_Year)} className="bg-transparent" isIconOnly>
                     <FiEdit />
                 </Button>
-            </div>
-            
             <Button  onClick={() => delete_year(year.id)}  className="bg-transparent" isIconOnly>
                 <MdDelete   className="text-base text-danger-400 cursor-pointer"/>
             </Button>

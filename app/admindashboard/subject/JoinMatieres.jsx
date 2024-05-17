@@ -130,7 +130,7 @@ const JoinMatieres = ({ getToken, matieres}) => {
          <Select 
          radius ="lg"
          size='sm'
-        label="Select an Subject" 
+        label="Sélectionnez une matiere" 
         className="flex-1 min-w-[12rem]" 
       >
         {matieres.map((matiere , index) => (
@@ -143,7 +143,7 @@ const JoinMatieres = ({ getToken, matieres}) => {
       <Select 
          radius ="lg"
          size='sm'
-        label="Select an niveau" 
+        label="Sélectionnez un niveau" 
         className="flex-1 min-w-[12rem]" 
       >
         {niveaux.map((niveau , index) => (
@@ -157,7 +157,7 @@ const JoinMatieres = ({ getToken, matieres}) => {
       isDisabled={selectedNiveau ===""}
   radius="lg"
   size="sm"
-  label="Select a class"
+  label="Sélectionnez une classe"
   className="flex-1 min-w-[12rem]"
 >
   {classes.map((classe, index) => (
@@ -177,7 +177,7 @@ const JoinMatieres = ({ getToken, matieres}) => {
           onChange={(e) => setTeacherUsername(e.target.value)}
           radius="lg"
           size="sm"
-          label="Teacher username"
+          label="Nom d'utilisateur de l'enseignant"
           type="text"
           labelPlacement="inside"
         />
@@ -194,12 +194,12 @@ const JoinMatieres = ({ getToken, matieres}) => {
           </div>
         )}
 
-        {(errorteacher && teacherUsername!=="") && <p className="text-red-600">We couldn't find a teacher with this number.</p>}
+        {(errorteacher && teacherUsername!=="") && <p className="text-red-600">Nous n'avons pas trouvé d'enseignant avec ce numéro</p>}
         </div>
     
 
         </div>
-        <Button onClick={joinSubject} className='bg-primaryColor text-white mt-4'>Join Subject</Button>
+        <Button onClick={joinSubject} className='bg-primaryColor text-white mt-4'>Ajouter</Button>
 
     </div>
   )

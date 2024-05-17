@@ -66,7 +66,7 @@ const FatchDevoir = ({fetchHomeWork ,userId ,getToken}) => {
 
     return (
         <div className='border-t   py-6 '>
-            <h2 className='font-medium mb-3'>All Homeworks</h2>
+            <h2 className='font-medium mb-3'>Tous les devoirs</h2>
 
             
                 <ul className='grid grid-cols-cards gap-4'>

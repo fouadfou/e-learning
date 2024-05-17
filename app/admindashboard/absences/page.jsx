@@ -13,11 +13,6 @@ const page = () => {
 
     const { getToken } = useAuth();
 
-    const toastRef = useRef(null);
-
-    const showNotification = (type, message) => {
-      toast[type](message);
-    };
 
 
     const [absences , setAbsences] = useState([]);
@@ -67,6 +62,7 @@ const page = () => {
     const reqToResend = async(eleve_id , absence) => {
             
         try {
+            const id = toast.loading("Please wait..." )
 
             const token = await getToken({ template: 'supabase' });
             const supabase = await supabaseClient(token);
@@ -83,7 +79,16 @@ const page = () => {
               console.log("CombinationObjects",CombinationObjects)
 
               if (CombinationObjects.length === 0) {
-                showNotification('error', 'Failed to send email: Parent email not found.');
+               /*  showNotification('error', 'Failed to send email: Parent email not found.'); */
+                
+                toast.update(id, {
+                  render: "Failed to send email: Parent email not found",
+                  type: "error",
+                  isLoading: false,
+                  hideProgressBar: false,
+                  autoClose: 1000,
+                  progress: null,
+                })
                 return;
               } else {
 
@@ -96,11 +101,28 @@ const page = () => {
                 .from('absence')
                 .update({notifier:true})
                 .eq("id",absence.id)
-                
-                showNotification('success', 'Email sent');
+
+                /* showNotification('success', 'Email sent'); */
+               
+                toast.update(id, {
+                  render: "Email sent",
+                  type: "success",
+                  isLoading: false,
+                  hideProgressBar: false,
+                  autoClose: 500,
+                  progress: null,
+                })
 
               } else {
-                showNotification('error', 'Email not sent');
+                /* showNotification('error', 'Email not sent'); */
+                toast.update(id, {
+                  render: "Email not sent'",
+                  type: "error",
+                  isLoading: false,
+                  hideProgressBar: false,
+                  autoClose: 500,
+                  progress: null,
+                })
               }
 
             }
@@ -145,9 +167,17 @@ const page = () => {
     <div className="p-8 flex flex-col gap-4">
       <AddAbsence setFatchAbsencesBool={setFatchAbsencesBool} getToken={getToken} />
 
-      <h1 className='font-bold text-xl w-full border-t pt-6 mt-5 p-1'>All Absences</h1>
+      <h1 className='font-bold text-xl w-full border-t pt-6 mt-5 p-1'>Toutes les absences</h1>
       
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+      <ToastContainer position="top-right"
+  autoClose={2000}
+  hideProgressBar
+  newestOnTop
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover />
 
       <ul className=' grid grid-cols-cards gap-4'>
         {absences.map((absence, index) => (
@@ -156,15 +186,15 @@ const page = () => {
             <div className='flex justify-between w-full rounded-t-xl font-bold p-4'>
             <h2>Absence / Class : "{absence.class_name}"</h2>
 
-            <Chip  size='sm' color={`${absence.notifier ? "success":"danger"}`} variant='flat'> {absence.notifier ? "notified" : "not notified"}</Chip>
+            <Chip  size='sm' color={`${absence.notifier ? "success":"danger"}`} variant='flat'> {absence.notifier ? "notifiés" : "non notifiés"}</Chip>
 
             </div>
 
             <div className='p-6 bg-grayBg rounded-lg'>
             <div className='flex flex-col gap-3 '>
                 <p><b>Matiere : </b> {absence.matiere_name} </p>
-                <p><b>Student : </b> {absence.eleve_nom} {absence.eleve_prenom} </p>
-                <p><b>Teacher : </b> {absence.ensg_nom} {absence.ensg_prenom} </p>
+                <p><b>Élève : </b> {absence.eleve_nom} {absence.eleve_prenom} </p>
+                <p><b>Enseignante(e) : </b> {absence.ensg_nom} {absence.ensg_prenom} </p>
 
                 
             <p>{absence.date_abs}</p>
@@ -176,10 +206,10 @@ const page = () => {
 
             <div className='flex  flex-wrap gap-2 mt-2'>
 
-            <Button onClick={() => reqToResend(absence.eleve_id , absence)} size='sm' className='bg-gray-800 bg-blue-500 text-white '> Notify parents</Button>
+            <Button onClick={() => reqToResend(absence.eleve_id , absence)} size='sm' className='bg-gray-800 bg-blue-500 text-white '> Informer les parents </Button>
             
 
-            <Button size='sm' className="bg-[#F9494B] text-white"> Delete Absence</Button>
+            <Button size='sm' className="bg-[#F9494B] text-white grow"> Supprimer </Button>
             </div>
             
             </div>

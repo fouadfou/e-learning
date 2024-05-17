@@ -5,7 +5,7 @@ import {Provider} from "./(NextuiProvider)/Provider";
 import Navbar from "@/components/Navbar/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import ChooseRole from "@/components/chooseRole/ChooseRole"
-
+import { frFR } from "@clerk/localizations";
 
 
 
@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       
          <body className={inter.className}>
-         <ClerkProvider  appearance={{
+         <ClerkProvider localization={frFR}  appearance={{
       variables: {
           colorPrimary: "#28B463",
           

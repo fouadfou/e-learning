@@ -8,7 +8,7 @@ const AuthLayout = ({children}) => {
         <Link href="/" className="flex items-center absolute rounded-full text-[13px] bg-primaryColor p-[6px] pr-4 text-white top-4 left-4">
           <IoMdArrowDropleft className='mr-1' />
           <p>
-          Home
+          Accueil
 
           </p>
         </Link>

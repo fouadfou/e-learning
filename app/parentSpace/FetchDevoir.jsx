@@ -199,7 +199,9 @@ console.log("homewokrs", HomeWorks)
         
           {
             HomeWorks.map((homeWork, index) => (
-              <li style={{boxShadow:"rgba(99, 99, 99, 0.15) 0px 2px 8px 0px"}}  className=" bg-grayBg border flex flex-col gap-2  p-5 text-[13px] rounded-lg " key={index}>
+              <li style={{boxShadow:"rgba(99, 99, 99, 0.15) 0px 2px 8px 0px"}}  className=" bg-white p-1 border  text-[13px] rounded-xl " key={index}>
+                           <div className='flex bg-grayBg rounded-lg flex-col gap-2 p-5'>
+
 
                            <h2 className='font-semibold text-[16px]'> {homeWork.title} de "{homeWork.matiere_name}" </h2>
                            <p> {homeWork.description}</p>
@@ -212,7 +214,10 @@ console.log("homewokrs", HomeWorks)
 
                            <p className='text-[12px]'>Teacher : {homeWork.ensg_nom} {homeWork.ensg_prenom}</p>
 
-                           <span className='flex items-center gap-1 bg-primaryColor rounded-lg w-fit p-2 text-white mt-3'>{homeWork.child_nom} {homeWork.child_prenom} <FaChild /> </span>
+                           </div>
+
+                           <span className='flex w-full items-center gap-1 bg-primaryColor rounded-lg  p-2 text-white mt-1 '>{homeWork.child_nom} {homeWork.child_prenom} <FaChild /> </span>
+
                           
                         </li>
             ))

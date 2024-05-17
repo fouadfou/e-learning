@@ -139,7 +139,7 @@ const page = () => {
 
    
     <Button size='sm'  onPress={onOpen} className='bg-primaryColor text-white' endContent={<GoPlus />}>
-    Add User
+    Ajouter un devoir
   </Button>
     <Modal 
         /* onClose ={()=>setRole("")} */
@@ -159,14 +159,14 @@ const page = () => {
           isRequired
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Enter homework title"
+          placeholder="Entrez le titre du devoir"
         />
 
       <Textarea
       isRequired
       label="Description"
       variant="bordered"
-      placeholder="Enter your description"
+      placeholder="Entrez la description"
       disableAnimation
       disableAutosize
       onChange={(e) => setDescription(e.target.value)}
@@ -193,7 +193,7 @@ const page = () => {
       <Select
   radius="lg"
   size="sm"
-  label="Select a Matiere"
+  label="Sélectionnez matière"
   className="w-full"
 >
   {teacherMatiers.map((matiere, index) => (
@@ -213,7 +213,7 @@ const page = () => {
           <Select
           radius="lg"
           size="sm"
-          label="Select a class"
+          label="Sélectionnez matière"
           className="w-full mt-3"
         >
           {classes.map((classe, index) => (

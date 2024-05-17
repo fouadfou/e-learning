@@ -145,14 +145,14 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
           value={num_student}
           onChange={e => setNum_student(e.target.value)}
           radius="lg"
-          label="Student number"
+          label="Numéro d'étudiant"
           type="text"
           labelPlacement="inside"
           className="w-fit"
           isRequired
         />
-        <DatePicker showTime onChange={(_, dateStr) => setTimeSelected(dateStr)} />
-        <Select radius="lg" size="sm" label="Select a matiere" className="flex-1 min-w-[12rem]" isRequired>
+        <DatePicker placeholder="Date d'absence" showTime onChange={(_, dateStr) => setTimeSelected(dateStr)} />
+        <Select radius="lg" size="sm" label="Sélectionnez une matière" className="flex-1 min-w-[12rem]" isRequired>
           {matieres.map((matiere, index) => (
             <SelectItem
               isRequired
@@ -170,7 +170,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
           isDisabled={selectedMatiere === ''}
           radius="lg"
           size="sm"
-          label="Select a teacher"
+          label="Sélectionnez un enseignante"
           className="flex-1 min-w-[12rem]"
         >
           {teachers.map((teacher, index) => (
@@ -186,7 +186,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
         </Select>
         <Button className="bg-primaryColor text-white" type="submit">
           {' '}
-          Add absence
+          Ajouter une absence
         </Button>
       </form>
 
@@ -202,7 +202,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
       )}
       {errorStudent && num_student !== '' && (
         <p className="text-red-600 w-fit mt-5 border-[1px] rounded-2xl p-2 px-3">
-          We couldn't find a student with this number.
+          Nous n'avons pas trouvé d'étudiant avec ce numéro
         </p>
       )}
     </div>
