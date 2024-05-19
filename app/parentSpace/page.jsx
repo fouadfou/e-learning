@@ -40,6 +40,9 @@ const page = () => {
     const [childrens, setChildrens] = useState([]); // Destructure the state variable and the setter function
     const [showChatList , setShowChatList] = useState(false);
 
+    const [ messages_sent, setMessages_sent] = useState(false); 
+
+
     const tabref = useRef(null);
 
     const scrollToRef = () => {
@@ -104,6 +107,45 @@ const page = () => {
     }, [])
 
 
+  /*   const countMessages = async () => {
+
+      try {
+        const token = await getToken({ template: 'supabase' });
+        const supabase = await supabaseClient(token);
+
+        const channel = supabase
+          .channel('public:chat_messages')
+          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_messages' }, payload => {
+            const newMessage = payload.new;
+
+            if (newMessage.receiver_id === userId) {
+              !showChatList && setMessages_sent(true);
+            }
+          })
+          .subscribe();
+
+          return () => {
+  
+            channel.unsubscribe();
+          
+        };
+
+      } catch (error) {
+        console.error('Error subscribing to real-time messages:', error.message);
+      }
+    };
+
+    useEffect(() => {
+      
+  
+      if (!showChatList) {
+        countMessages();
+      }
+  
+      // Unsubscribe when component unmounts or when showChatList changes
+    
+    }, [showChatList]);
+ */
 
   return (
     <div className='relative'>
@@ -183,15 +225,16 @@ const page = () => {
 
          <div className='fixed bottom-4 right-4 '>
         <div>
-        <ChatList getToken={getToken} childrens={childrens} showChatList={showChatList} />
+        <ChatList userId={userId} setMessages_sent={setMessages_sent} getToken={getToken} childrens={childrens} showChatList={showChatList} />
 
       
 
           </div>
-
+          <Badge size="sm" className={`${(showChatList || !messages_sent) && "opacity-0"} z-50 border-0 top-2`}  content={""} color="danger" shape="rectangle">
           <div onClick={() => setShowChatList((prev) => !prev)} style={{boxShadow:"rgba(0, 0, 0, 0.24) 0px 3px 8px"}} className='z-50 bg-grayBg ease-linear duration-100 cursor-pointer hover:scale-105 flex items-center justify-center text-2xl  w-[3rem] h-[3rem] border text-default-600 rounded-full' >
               {showChatList ? <IoClose /> : <AiFillMessage  />} 
         </div>
+        </Badge>
 
         
 

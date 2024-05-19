@@ -76,7 +76,6 @@ const page = () => {
               }));
 
 
-              console.log("CombinationObjects",CombinationObjects)
 
               if (CombinationObjects.length === 0) {
                /*  showNotification('error', 'Failed to send email: Parent email not found.'); */
@@ -140,8 +139,7 @@ const page = () => {
     
       
           const handleUpdates = async (payload) => {
-            console.log('Absence updated:', payload.new);
-
+  
 
             setAbsences((prevAbsences) =>
               prevAbsences.map((absence) =>
