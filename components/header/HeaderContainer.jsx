@@ -3,11 +3,11 @@ import React, { useRef }  from 'react'
 import localFont from "next/font/local"
 import {motion} from "framer-motion"
 import { window ,phone ,phones ,purpleBg} from '@/public/images';
-import Image from 'next/image'
 import { IoPlayCircle } from "react-icons/io5";
 import {Button } from"@nextui-org/react"
+import Image from 'next/image';
 import Link from 'next/link'
-
+import {child, children ,family , family1 ,parent , study , children1} from "@/public/images"
 
 
 const myfont = localFont({src:"../../fonts/SKULL BONES Bold22-354c5e6b.otf"})
@@ -36,9 +36,9 @@ const HeaderContainer = () => {
     
     <div >
 
-        <div className=' relative header-container z-20  h-fit   w-full flex  flex-col items-center  justify-center pb-[33%] pt-[2.5rem] md:pb-[27%]  md:pt-[3rem]'>
+        <div className='logos relative header-container z-20  h-[calc(100vh-3.2rem)] overflow-hidden   w-full flex  flex-col items-center  justify-center   '>
           <div style={bg} className="logos absolute top-0 "></div>
-          <div className=' text-primeColor w-[78%] md:w-[70%] lg:w-[65%]  text-center  items-center  my-auto flex flex-col gap-2 overflow-hidden'>
+          <div className=' text-primeColor  w-[60%]  md:mt-24  text-center  items-center  my-auto flex flex-col gap-2 overflow-hidden'>
 
             <motion.h1 initial={{x:-150 , opacity:0}} animate={{x:0, opacity:1}} transition={{duration:0.7 , ease:"backInOut"}}
             className='text-[30px] md:text-[36px] lg:text-[45px] font-bold  '>Making education better for everyone with 
@@ -62,7 +62,34 @@ const HeaderContainer = () => {
             </motion.div>
           </div>
 
-          <div  className=' z-40 logos absolute bottom-0 translate-y-1/2 w-full px-[10%] overflow-hidden '>
+
+          <motion.div initial={{y:20 , opacity:0}} animate={{y:0 , opacity:1}} transition={{delay:0.3,duration:0.8,type:"spring"}}
+           className='absolute  h-fit  bottom-0 left-6 rounded-t-xl md:w-[170px] md:h-[170px]  lg:w-[200px] lg:h-[220px]'   style={{boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px 0px, rgba(0, 0, 0, 0.3) 0px 30px 60px 0px"}} >
+          <Image  className='rounded-t-xl opacity-85' alt='img1'  layout="fill"  src={child.src} />
+        </motion.div>
+
+        <motion.div initial={{y:20 , opacity:0}} animate={{y:0 , opacity:1}} transition={{delay:0.4,duration:0.8,type:"spring"}}
+         className='absolute h-fit bottom-0 md:left-[14rem] lg:left-[17rem] rounded-t-xl md:w-[170px] md:h-[120px] lg:w-[200px] lg:h-[150px]' style={{boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px 0px, rgba(0, 0, 0, 0.3) 0px 30px 60px 0px" }}>
+          <Image className='rounded-t-xl opacity-90' alt='img2' layout="fill" src={study.src} />
+        </motion.div>
+
+        <motion.div initial={{y:20 , opacity:0}} animate={{y:0 , opacity:1}} transition={{delay:0.5,duration:0.8,type:"spring"}}
+         className='absolute  h-fit bottom-0 md:right-[14rem]  lg:right-[17rem] rounded-t-xl md:w-[170px] md:h-[120px]  lg:w-[200px] lg:h-[150px]' style={{boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px 0px, rgba(0, 0, 0, 0.3) 0px 30px 60px 0px" }}>
+          <Image className='rounded-t-xl opacity-90' alt='img2' layout="fill" src={parent.src} />
+        </motion.div>
+
+        <motion.div  initial={{y:20 , opacity:0}} animate={{y:0 , opacity:1}} transition={{delay:0.6,duration:0.8,type:"spring"}} 
+        className='absolute   h-fit bottom-0 right-6 rounded-t-xl md:w-[170px] md:h-[170px] lg:w-[200px] lg:h-[220px]' style={{boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px 0px, rgba(0, 0, 0, 0.3) 0px 30px 60px 0px" }}>
+          <Image className='rounded-t-xl opacity-90' alt='img2' layout="fill" src={children1.src} />
+        </motion.div>
+
+        
+
+       
+
+                  
+
+         {/*  <div  className=' z-40 logos absolute bottom-0 translate-y-1/2 w-full px-[10%] overflow-hidden '>
           
           
             <Image width={0}
@@ -92,7 +119,7 @@ const HeaderContainer = () => {
           </motion.div>
 
           </div>
-
+ */}
 
         </div>
 

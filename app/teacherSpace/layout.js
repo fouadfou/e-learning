@@ -34,6 +34,11 @@ const listElements = [
         icon: <BsFileTextFill />,
         link: "/devoir"
     },
+    {
+      name: 'les notes',
+      icon: <BsFileTextFill />,
+      link: "/note"
+  },
  
   ];
 

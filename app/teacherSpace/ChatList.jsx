@@ -109,9 +109,9 @@ const ChatList = ({showChatList , getToken , userId , setMessages_sent}) => {
             console.error('Error fetching unseen messages:', error.message);
           }
         };
-        showChatList && getMsgNotseen();
+        getMsgNotseen();
         
-      }, [showChatList])
+      }, [showChatList , userId])
 
 
 
@@ -145,7 +145,7 @@ const ChatList = ({showChatList , getToken , userId , setMessages_sent}) => {
               const newMessage = payload.new;
 
 
-              if(newMessage.sender_id !== userId) {
+              if(newMessage.sender_id !== userId && newMessage.receiver_id === userId ) {
 
               const sender = teacherResults.find(teacher => teacher.user_id === newMessage.sender_id);
 

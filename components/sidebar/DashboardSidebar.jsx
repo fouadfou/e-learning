@@ -36,7 +36,7 @@ const DashboardSidebar = ({listElements , userShow , role}) => {
     
      
   return (
-    <div  style={{boxShadow:"rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px"}} className={`sticky ${role ? "top-[3.2rem] w-[11rem]":"top-0 w-[13.5rem]"} overflow-auto h-screen p-4 pt-1  flex flex-col gap-4 `}>
+    <div  style={{boxShadow:"rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px"}} className={`sticky ${role === "Admin" ? "top-[3.2rem] min-w-[11rem]":"top-0 min-w-[15rem]"} overflow-auto h-screen p-4 pt-1  flex flex-col gap-4 `}>
         <Link className={`${userShow}`} href="/">
         <BsArrowLeftShort className=' absolute top-[0.7rem] left-[0.5rem] rounded-full border-[5px] border-white text-[32px] cursor-pointer  hover:scale-110 duration-100 ease-linear text-white bg-primaryColor ' />
         </Link>

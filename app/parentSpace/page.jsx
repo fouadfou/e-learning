@@ -1,19 +1,23 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@clerk/nextjs'
-import FatchDevoir from './FetchDevoir'
 import { family } from '@/public/images'
 import { Button ,Badge , Snippet , Chip , Tabs, Tab , Popover , PopoverContent , PopoverTrigger} from '@nextui-org/react'
 import { supabaseClient } from '../utils/supabaseClient'
-import { IoNotifications } from "react-icons/io5";
+
 import Email from './Email'
 import ChildInfo from './fetchChildInfo/ChildInfo'
+import Notes from './Notes'
+import ChatList from './ChatList'
+import FatchDevoir from './FetchDevoir'
+
+
+
 import { AiFillMessage } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
-import ChatList from './ChatList'
 import { IoIosClose } from "react-icons/io";
 import { FaMinus } from "react-icons/fa6";
-
+import { IoNotifications } from "react-icons/io5";
 
 
 
@@ -41,9 +45,61 @@ const page = () => {
     const [showChatList , setShowChatList] = useState(false);
 
     const [ messages_sent, setMessages_sent] = useState(false); 
-
+    const [notifiedPages , setNotifiedPages] = useState([]);
 
     const tabref = useRef(null);
+
+
+    useEffect(() => {
+      const fetchDataNotSeen = async () => {
+        const notesArray = [];
+  
+        for (const child of childrens) {
+          try {
+            const token = await getToken({ template: 'supabase' });
+            const supabase = await supabaseClient(token);
+            
+            // Fetch notes based on class_id
+            const { data:notesData, error } = await supabase
+              .from('notes')
+              .select("*,class(class_name)")
+              .eq('class_id', child.class_id)
+              .eq('seen',false)
+            
+  
+            if (error) {
+              throw error;
+            }
+
+            const { data: devoirsData, error: devoirsError } = await supabase
+            .from('devoir')
+            .select('*,class(class_name)')
+            .eq('class_id', child.class_id)
+            .eq('seen', false);
+
+            const pages = [];
+          if (notesData && notesData.length > 0) {
+            pages.push('notes');
+          }
+          if (devoirsData && devoirsData.length > 0) {
+            pages.push('devoirs');
+          }
+          setNotifiedPages(pages);
+  
+        
+          } catch (error) {
+            console.error('Error fetching notes:', error.message);
+          }
+        }
+      };
+  
+      fetchDataNotSeen();
+    }, [childrens, getToken]);
+
+    
+
+
+
 
     const scrollToRef = () => {
 
@@ -74,6 +130,7 @@ const page = () => {
         userId && getParent()
      
     }, [userId])
+
 
     useEffect(() => {
 
@@ -107,45 +164,81 @@ const page = () => {
     }, [])
 
 
-  /*   const countMessages = async () => {
-
+    const updateDataNotSeen = async (target) => {
+      
       try {
         const token = await getToken({ template: 'supabase' });
         const supabase = await supabaseClient(token);
-
-        const channel = supabase
-          .channel('public:chat_messages')
-          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_messages' }, payload => {
-            const newMessage = payload.new;
-
-            if (newMessage.receiver_id === userId) {
-              !showChatList && setMessages_sent(true);
-            }
-          })
-          .subscribe();
-
-          return () => {
-  
-            channel.unsubscribe();
-          
-        };
-
+    
+        let data, error;
+    
+        if (target === "notes") {
+          ({ data, error } = await supabase
+            .from("notes")
+            .update({ seen: true })
+            .eq("seen", false));
+        } else if (target === "devoirs") {
+          ({ data, error } = await supabase
+            .from("devoir")
+            .update({ seen: true })
+            .eq("seen", false));
+        }
+    
+        if (error) {
+          throw error;
+        }
+    
+        if (notifiedPages.includes(target)) {
+          setNotifiedPages(prev => prev.filter(page => page !== target));
+        }
       } catch (error) {
-        console.error('Error subscribing to real-time messages:', error.message);
+        console.error('Error updating data:', error.message);
       }
     };
 
+
+
+
+ 
     useEffect(() => {
-      
+      const subscribeToNewMessages = async () => {
+        try {
+          const token = await getToken({ template: 'supabase' });
+          const supabase = await supabaseClient(token);
   
-      if (!showChatList) {
-        countMessages();
-      }
+          const channel = supabase
+            .channel('public:notes')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notes' }, payload => {
+              const newNote = payload.new;
+              if (!notifiedPages.includes("notes")) {
+                const isChildInClass = childrens.some(child => child.class_id === newNote.class_id);
+                if (isChildInClass) {
+                  setNotifiedPages(prev => [...prev, "notes"]);
+                }
+              }
+            })
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'devoir' }, payload => {
+              const newDevoir = payload.new;
+              if (!notifiedPages.includes("devoirs")) {
+                const isChildInClass = childrens.some(child => child.class_id === newDevoir.class_id);
+                if (isChildInClass) {
+                  setNotifiedPages(prev => [...prev, "devoirs"]);
+                }
+              }
+            })
+            .subscribe();
   
-      // Unsubscribe when component unmounts or when showChatList changes
-    
-    }, [showChatList]);
- */
+          return () => {
+            supabase.removeChannel(channel);
+          };
+        } catch (error) {
+          console.error('Error subscribing to real-time messages:', error.message);
+        }
+      };
+  
+      subscribeToNewMessages();
+    }, [childrens, notifiedPages]);
+
 
   return (
     <div className='relative'>
@@ -153,12 +246,12 @@ const page = () => {
        
 
         <div style={familyBg}  className='relative p-16 flex items-center  h-[23rem]'>
-           <div className='absolute top-4 right-0 cursor-pointer flex justify-center items-center p-2 px-4 border-gray-500 border-[2px] border-r-0 bg-white bg-opacity-90  rounded-l-full '>
+          {/*  <div className='absolute top-4 right-0 cursor-pointer flex justify-center items-center p-2 px-4 border-gray-500 border-[2px] border-r-0 bg-white bg-opacity-90  rounded-l-full '>
             <Badge  size='sm' className='border-0 text-[8px]' content="5" color="danger" placement="top-right"  >
                 <IoNotifications className='text-gray-500 text-[18px]' />
             </Badge>
                  
-            </div>
+            </div> */}
             <div className='flex flex-col gap-4 text-white w-[30%] '>
             <h2 className="text-[32px] font-bold text-gray-100 ">Salut MR.{userId && parent.nom} {userId && parent.prenom} </h2>
   <p className="text-sm  leading-relaxed tracking-wider text-gray-300">
@@ -211,11 +304,26 @@ const page = () => {
           
         </Tab>
 
-        <Tab  key="asbsence" title="Asbsence">
+        <Tab    key="notes" title={
+              <div onClick={() => updateDataNotSeen("notes")} className='flex gap-2 items-center'>
+                Les notes
+                {notifiedPages.includes("notes") && (
+                  <span className=' w-2 h-2 rounded-full bg-red-500'></span>
+                )}
+              </div>
+            }>
+          <Notes childrens={childrens} notifiedPages={notifiedPages}  getToken={getToken} />
           
         </Tab>
-        <Tab key="photos" title="Devoirs">
-        <FatchDevoir childrens={childrens}  userId={userId} getToken={getToken}/>
+        <Tab  key="photos" title={
+              <div onClick={() => updateDataNotSeen("devoirs")} className='flex gap-2 items-center'>
+                Les devoirs
+                {notifiedPages.includes("devoirs") && (
+                  <span className=' w-2 h-2 rounded-full bg-red-500'></span>
+                )}
+              </div>
+            }>
+        <FatchDevoir notifiedPages={notifiedPages} childrens={childrens}  userId={userId} getToken={getToken} />
           
         </Tab>
         </Tabs>

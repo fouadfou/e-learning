@@ -17,7 +17,6 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
     const [hasMore, setHasMore] = useState(true);
     const containerRef = useRef(null);
 
-    console.log("teacher_id",teacher_id)
 
 
     useEffect(() => {

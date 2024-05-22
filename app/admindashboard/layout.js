@@ -17,6 +17,7 @@ import { RiParentFill } from "react-icons/ri";
 import { GiKnapsack } from "react-icons/gi";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { VscSaveAs } from "react-icons/vsc";
+import { PiStudentFill } from "react-icons/pi";
 
 import { redirect } from "next/navigation";
 
@@ -38,6 +39,11 @@ const listElements = [
       icon: <FaUser />,
       link: "/users"
   },
+  {
+    name: 'Élèves',
+    icon: <PiStudentFill />,
+    link: "/students"
+},
 
   {
     name: 'Parents/Enfants',

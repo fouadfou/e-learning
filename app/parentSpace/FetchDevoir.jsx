@@ -4,7 +4,7 @@ import { supabaseClient } from '../utils/supabaseClient';
 import { FaChild } from "react-icons/fa6";
 
 
-const fetchDevoir = ({getToken , childrens}) => {
+const fetchDevoir = ({getToken , childrens , notifiedPages}) => {
 
   const [HomeWorks , setHomeWorks] = useState([]);
 
@@ -20,13 +20,14 @@ const fetchDevoir = ({getToken , childrens}) => {
 
             // Fetch homeworks based on class_id
 
-            console.log("child", child.class_id)
+
             const token = await getToken({ template: 'supabase' });
             const supabase = await supabaseClient(token);
             const { data, error } = await supabase
               .from('devoir')
               .select('* ,matiere(matiere_name), ensg( user_id, users(nom , prenom))')
-              .eq('class_id', child.class_id);
+              .eq('class_id', child.class_id)
+              .order('created_at', { ascending: false });
 
 
               const CombinationObjects = data.map(item => ({
@@ -216,7 +217,7 @@ console.log("homewokrs", HomeWorks)
 
                            </div>
 
-                           <span className='flex w-full items-center gap-1 bg-primaryColor rounded-lg  p-2 text-white mt-1 '>{homeWork.child_nom} {homeWork.child_prenom} <FaChild /> </span>
+                           <p className=' w-full text-base text-center  bg-primaryColor rounded-lg  p-2 text-white mt-1 '>{homeWork.child_nom} {homeWork.child_prenom}  </p>
 
                           
                         </li>
