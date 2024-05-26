@@ -9,7 +9,7 @@ import { FiEdit } from "react-icons/fi";
 
 
 
-const FetchNotes = ({click}) => {
+const FetchNotes = ({click }) => {
 
     const { userId, getToken } = useAuth()
 
@@ -19,33 +19,56 @@ const FetchNotes = ({click}) => {
 
     useEffect(() => {
 
-        const fetchNotes  = async () => {
+      
+    const fetchNotes  = async () => {
 
-            try {
-                
-                const token = await getToken({ template: 'supabase' })
-                const supabase = await supabaseClient(token)
-    
-                // Fetch all classes from Supabase
-                const { data, error } = await supabase
-                .from('notes')
-                .select('* , class(class_name)')
-                .eq('ensg_id ', userId)
+      try {
+          
+          const token = await getToken({ template: 'supabase' })
+          const supabase = await supabaseClient(token)
+
+          // Fetch all classes from Supabase
+          const { data, error } = await supabase
+          .from('notes')
+          .select('* , class(class_name)')
+          .eq('ensg_id ', userId)
+          .order('created_at', { ascending: false });
 
 
-                setNotes(data)
+          setNotes(data)
 
-            } catch (error) {
-          console.error('Error fetching notes:', error.message)
-                
-            }
-        }
+      } catch (error) {
+    console.error('Error fetching notes:', error.message)
+          
+      }
+  }
+
 
         fetchNotes();
       
     }, [click])
 
+    
+    const deletNote=  async(note_id) => {
 
+      try {
+
+        const token = await getToken({ template: 'supabase' })
+        const supabase = await supabaseClient(token)
+
+        // Fetch all classes from Supabase
+        const { data, error } = await supabase
+        .from('notes')
+        .delete()
+        .eq("id",note_id)
+        
+        setNotes(prevNotes => prevNotes.filter(note => note.id !== note_id));
+        
+      } catch (error) {
+        console.error('Error deleting note:', error.message)
+      }
+
+    }
     
     
   return (
@@ -68,7 +91,7 @@ const FetchNotes = ({click}) => {
 
             <div className='flex items-center  mt-2 gap-2'>
                 
-                <Button className="bg-red-500 text-white flex-1">Supprimer</Button>
+                <Button onClick={() => deletNote(note.id)} className="bg-red-500 text-white flex-1">Supprimer</Button>
                 <Button isIconOnly className='bg-grayBg border'><FiEdit /></Button>
             </div>
           </li>

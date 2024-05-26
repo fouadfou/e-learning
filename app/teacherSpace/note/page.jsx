@@ -19,7 +19,7 @@ const Page = () => {
   const [description , setDescription] = useState('');
   const [fileList, setFileList] = useState([]);
   const [previewImage, setPreviewImage] = useState('');
-  const [click , setCclick] = useState(false);
+  const [click , setClick] = useState(false);
 
 
   useEffect(() => {
@@ -97,17 +97,14 @@ const Page = () => {
       reader.onerror = (error) => reject(error);
     });
 
+
+
     const handleUpload = async () => {
 
-    
-
+  
       const file = fileList[0];
 
-      console.log("file",file)
-      console.log("title",title)
-      console.log("description",description)
-      console.log("selectedClass",selectedClass)
-      if (!file || title ==="" || description ===""  || selectedClass ===""  )
+      if (!file || title ===""  || selectedClass ===""  )
         {
           return;} 
     
@@ -164,8 +161,7 @@ const Page = () => {
          .update({ src: imageUrl.publicUrl.toString() })
          .eq("id", lastNote[0].id);
 
-  
-         setCclick(!click)
+         setClick(!click)
        // Reset state
         setTitle('');
         setDescription('');

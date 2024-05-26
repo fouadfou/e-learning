@@ -48,13 +48,13 @@ const HeaderContainer = () => {
               
               className='text-primaryColor tracking-widest md:tracking-widest absolute top-5 text-[23px] md:text-[29px] lg:text-[31px]  left-2 '>Pickr</span>Pickr</motion.span></motion.h1>
             <motion.p initial={{scale:0 , opacity:0}} animate={{scale:1, opacity:1}} transition={{duration:0.7 , ease:"backInOut"}}
-            className='md:text-lg my-2 '>Turn Your Passion into a Business! <br  /> Create Your Own Shop and Start Selling Today</motion.p>
+            className='md:text-lg my-2 '>Accédez aux devoirs, aux notes et aux événements importants de la vie scolaire de votre enfant. Une plateforme complète pour rester informé et engagé dans l'éducation de votre enfant</motion.p>
 
             <motion.div initial={{x:150 , opacity:0}} animate={{x:0, opacity:1}} transition={{duration:0.8 , ease:"backInOut"}}
             className='h-fit flex flex-col md:flex-row items-center justify-center gap-y-2 gap-x-6'>
           
-              <Link  href="/signup" >
-                <Button className='bg-primaryColor text-white'>Get started</Button>
+              <Link  href="/parentSpace" >
+                <Button className='bg-primaryColor text-white'>Suivre votre enfant</Button>
               </Link>
 
            

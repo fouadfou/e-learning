@@ -197,8 +197,6 @@ const page = () => {
     };
 
 
-
-
  
     useEffect(() => {
       const subscribeToNewMessages = async () => {
@@ -257,7 +255,7 @@ const page = () => {
   <p className="text-sm  leading-relaxed tracking-wider text-gray-300">
     Bienvenue dans l'espace parents. Ici vous pourrez suivre les activités, les devoirs et la présence de vos enfants.
   </p>
-  <Button size="sm" className="bg-primaryColor text-white mt-3 w-fit">fdzzd</Button>
+  
             </div>
 
             

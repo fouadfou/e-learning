@@ -87,12 +87,12 @@ const fetchDevoir = ({getToken , childrens , notifiedPages}) => {
 
    {/*    <h2 className='font-bold text-xl mb-6'> HomeWorks of your childrens </h2> */}
 
-      <ul className='grid grid-cols-cards gap-4'>
+      <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         
           {
             HomeWorks.map((homeWork, index) => (
-              <li style={{boxShadow:"rgba(99, 99, 99, 0.15) 0px 2px 8px 0px"}}  className=" bg-white p-1 border  text-[13px] rounded-xl " key={index}>
-                           <div className='flex bg-grayBg rounded-lg flex-col gap-2 p-5'>
+              <li style={{boxShadow:"rgba(99, 99, 99, 0.15) 0px 2px 8px 0px"}}   className=" bg-white p-1 border flex flex-col   text-[13px] rounded-xl " key={index}>
+                           <div className='flex bg-grayBg rounded-lg flex-col gap-2 p-5 grow'>
 
 
                            <h2 className='font-semibold text-[16px]'> {homeWork.title} de "{homeWork.matiere_name}" </h2>
@@ -104,7 +104,7 @@ const fetchDevoir = ({getToken , childrens , notifiedPages}) => {
 
                            </div>
 
-                           <p className='text-[12px]'>Teacher : {homeWork.ensg_nom} {homeWork.ensg_prenom}</p>
+                           <p className='text-[12px] mt-auto'><strong>Enseignant :</strong> {homeWork.ensg_nom} {homeWork.ensg_prenom}</p>
 
                            </div>
 

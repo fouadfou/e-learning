@@ -244,9 +244,9 @@ const page = () => {
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={onClose}>
-                Close
+                Fermer
               </Button>
-              <Button type='submit' className='bg-primaryColor text-white' onSubmit={createHomework}>Publish Homework</Button>
+              <Button type='submit' className='bg-primaryColor text-white' onSubmit={createHomework}>Publier</Button>
             </ModalFooter>
           </form>
         </ModalContent>

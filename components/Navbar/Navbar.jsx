@@ -152,13 +152,13 @@ const Navbar = () => {
                       
                     </div>
                   </Link>
-                  <Link href="/sign-up" onClick={()=>setIsOpen(false)} >
+                 {/*  <Link href="/sign-up" onClick={()=>setIsOpen(false)} >
                     <div  className="flex text-[#565656]  hover:bg-grayBg  items-center gap-3 p-2 px-3  rounded-lg ">
                       <FiUserPlus className="text-[#BCBCBC] "/>
                       <p className="text-[13px]">S'inscrire</p>
                       
                     </div>
-                  </Link>
+                  </Link> */}
                 </div>
               </PopoverContent>
               </Popover>

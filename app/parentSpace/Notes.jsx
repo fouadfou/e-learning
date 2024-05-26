@@ -86,7 +86,7 @@ const Notes = ({getToken , childrens ,notifiedPages}) => {
               <h3 className="font-semibold text-xl mb-1">{note.title}</h3>
               <p className="text-gray-700 ">{note.description}</p>
               <p className="text-gray-600 "><strong>Class:</strong> {note.class_name}</p>
-              <p className="text-gray-600 "><strong>Teacher:</strong> {note.ensg_nom} {note.ensg_prenom}</p>
+              <p className="text-gray-600 "><strong>Enseignant:</strong> {note.ensg_nom} {note.ensg_prenom}</p>
 
               
               {note.src && (
