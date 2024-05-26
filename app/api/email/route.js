@@ -45,7 +45,7 @@ export async function POST(req) {
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: 'fou33fou@gmail.com',
+      user: 'soheibtalhi0@gmail.com',
       pass: process.env.SMTP_PASSWORD, // Your Gmail password
     },
   });
@@ -54,9 +54,9 @@ export async function POST(req) {
     for (const email of emails) {
       // Send email
       let info = await transporter.sendMail({
-        from: 'fou33fou@gmail.com', // Your name and email address
+        from: 'soheibtalhi0@gmail.com', // Your name and email address
         to: email.parent_email,  // Recipient's email address
-        subject: "foufo", // Subject line
+        subject: "Absence", // Subject line
         html: ` <div className='flex flex-col gap-3'>
         <h1 className='text-xl font-bold'>Votre enfant est absent</h1>
         <p>Votre enfant, <b>"${absence.eleve_nom} ${absence.eleve_prenom}"</b>, est absent lors du cours de <b>"${absence.matiere_name}"</b> enseigné par <b>"M. ${absence.ensg_nom} ${absence.ensg_prenom}"</b></p>
