@@ -88,6 +88,7 @@ const page = () => {
               .from('matiere_ensg')
               .select('class_id , class(class_name)')
               .eq('matiere_id', selectedMatiere)
+              .eq('ensg_id' , userId)
       
             if (error) {
               throw error;
@@ -213,7 +214,7 @@ const page = () => {
           <Select
           radius="lg"
           size="sm"
-          label="Sélectionnez matière"
+          label="Sélectionnez class"
           className="w-full mt-3"
         >
           {classes.map((classe, index) => (

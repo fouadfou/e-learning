@@ -65,22 +65,22 @@ const HeaderContainer = () => {
 
           <motion.div initial={{y:20 , opacity:0}} animate={{y:0 , opacity:1}} transition={{delay:0.3,duration:0.8,type:"spring"}}
            className='absolute  h-fit  bottom-0 left-6 rounded-t-xl md:w-[170px] md:h-[170px]  lg:w-[200px] lg:h-[220px]'   style={{boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px 0px, rgba(0, 0, 0, 0.3) 0px 30px 60px 0px"}} >
-          <Image  className='rounded-t-xl opacity-85' alt='img1'  layout="fill"  src={child.src} />
+          <Image  className='rounded-t-xl opacity-85' alt='img1'  fill  src={child.src} />
         </motion.div>
 
         <motion.div initial={{y:20 , opacity:0}} animate={{y:0 , opacity:1}} transition={{delay:0.4,duration:0.8,type:"spring"}}
          className='absolute h-fit bottom-0 md:left-[14rem] lg:left-[17rem] rounded-t-xl md:w-[170px] md:h-[120px] lg:w-[200px] lg:h-[150px]' style={{boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px 0px, rgba(0, 0, 0, 0.3) 0px 30px 60px 0px" }}>
-          <Image className='rounded-t-xl opacity-90' alt='img2' layout="fill" src={study.src} />
+          <Image className='rounded-t-xl opacity-90' alt='img2' fill src={study.src} />
         </motion.div>
 
         <motion.div initial={{y:20 , opacity:0}} animate={{y:0 , opacity:1}} transition={{delay:0.5,duration:0.8,type:"spring"}}
          className='absolute  h-fit bottom-0 md:right-[14rem]  lg:right-[17rem] rounded-t-xl md:w-[170px] md:h-[120px]  lg:w-[200px] lg:h-[150px]' style={{boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px 0px, rgba(0, 0, 0, 0.3) 0px 30px 60px 0px" }}>
-          <Image className='rounded-t-xl opacity-90' alt='img2' layout="fill" src={parent.src} />
+          <Image className='rounded-t-xl opacity-90' alt='img2' fill src={parent.src} />
         </motion.div>
 
         <motion.div  initial={{y:20 , opacity:0}} animate={{y:0 , opacity:1}} transition={{delay:0.6,duration:0.8,type:"spring"}} 
         className='absolute   h-fit bottom-0 right-6 rounded-t-xl md:w-[170px] md:h-[170px] lg:w-[200px] lg:h-[220px]' style={{boxShadow:"rgba(50, 50, 93, 0.25) 0px 50px 100px 0px, rgba(0, 0, 0, 0.3) 0px 30px 60px 0px" }}>
-          <Image className='rounded-t-xl opacity-90' alt='img2' layout="fill" src={children1.src} />
+          <Image className='rounded-t-xl opacity-90' alt='img2' fill src={children1.src} />
         </motion.div>
 
         

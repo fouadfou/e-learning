@@ -234,7 +234,7 @@ const TableData = ({children}) => {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by nom , prenom"
+            placeholder="Recherche par prénom, nom"
             startContent={<CiSearch />}
             value={filterValue}
             onClear={() => onClear()}
@@ -265,7 +265,7 @@ const TableData = ({children}) => {
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<IoChevronDown className="text-small" />} variant="flat">
-                  Columns
+                    Colonnes
                 </Button>
               </DropdownTrigger>
               <DropdownMenu

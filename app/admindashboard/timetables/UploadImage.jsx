@@ -22,7 +22,6 @@ const getBase64 = (file) =>
 
         const [fileList, setFileList] = useState([]);
         const [previewImage, setPreviewImage] = useState('');
-        const [imgURl , setImageUrl] =  useState('');
         const [classes , setClasses] = useState([]);
         const [selectedClass , setSelectedClass] = useState(null);
 
@@ -93,7 +92,7 @@ const getBase64 = (file) =>
       
           const handleUpload = async () => {
             const file = fileList[0];
-            if (!file) return;
+            if (!file && selectedClass !== null) return;
           
             try {
               const token = await getToken({ template: 'supabase' });
@@ -176,7 +175,7 @@ const getBase64 = (file) =>
               src={previewImage}
               style={{ display: 'none' }}
             />
-            <Button isDisabled={selectedClass === null} size='sm' className='bg-primaryColor text-white' onClick={handleUpload}>Ajouter l'emplois du temps au class</Button>
+            <Button size='sm' className='bg-primaryColor text-white' onClick={handleUpload}>Ajouter l'emplois du temps au class</Button>
             </div>
 
             <div>

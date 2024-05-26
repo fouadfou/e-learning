@@ -97,7 +97,15 @@ const JoinMatieres = ({ getToken, matieres}) => {
         fetchteacherByUsername();
       }, [teacherUsername, getToken]);
 
-      const joinSubject = async () => {
+      const joinSubject = async (e) => {
+
+        e.preventDefault();
+
+    if (!selectedMatiere || !selectedNiveau || !selectedClass || !selectedTeacher) {
+      alert('Veuillez remplir tous les champs.');
+      return;
+    }
+
         try {
           const token = await getToken({ template: 'supabase' });
           const supabase = await supabaseClient(token);
@@ -120,18 +128,16 @@ const JoinMatieres = ({ getToken, matieres}) => {
         }
       };
 
-    console.log("selectedClass",selectedClass)
-
-
-
   return (
-    <div className='border-b-[1px] pb-8'>
+    <form onSubmit={joinSubject} className='border-b-[1px] pb-8'>
     <div className='flex flex-wrap items-center gap-4'>
          <Select 
          radius ="lg"
          size='sm'
         label="Sélectionnez une matiere" 
         className="flex-1 min-w-[12rem]" 
+        isRequired
+
       >
         {matieres.map((matiere , index) => (
           <SelectItem className="whitespace-nowrap" onClick={() => setSelectedMatiere({ id: matiere.id, matiere_name: matiere.matiere_name , class_name:matiere.class_name })} key={index} value={selectedMatiere}>
@@ -145,6 +151,7 @@ const JoinMatieres = ({ getToken, matieres}) => {
          size='sm'
         label="Sélectionnez un niveau" 
         className="flex-1 min-w-[12rem]" 
+        isRequired
       >
         {niveaux.map((niveau , index) => (
           <SelectItem className="whitespace-nowrap " onClick={() => setSelectedNiveau(niveau.id)} key={index} value={selectedNiveau}>
@@ -159,6 +166,7 @@ const JoinMatieres = ({ getToken, matieres}) => {
   size="sm"
   label="Sélectionnez une classe"
   className="flex-1 min-w-[12rem]"
+  isRequired
 >
   {classes.map((classe, index) => (
     <SelectItem
@@ -180,6 +188,7 @@ const JoinMatieres = ({ getToken, matieres}) => {
           label="Nom d'utilisateur de l'enseignant"
           type="text"
           labelPlacement="inside"
+          isRequired
         />
 
         <div>
@@ -199,9 +208,9 @@ const JoinMatieres = ({ getToken, matieres}) => {
     
 
         </div>
-        <Button onClick={joinSubject} className='bg-primaryColor text-white mt-4'>Ajouter</Button>
+        <Button type="submit"  className='bg-primaryColor text-white mt-4'>Ajouter</Button>
 
-    </div>
+    </form>
   )
 }
 

@@ -39,6 +39,8 @@ const AddClass = ({classes,setClasses}) => {
         const supabase = await supabaseClient(token);
         const { data, error } = await supabase
             .from('class').select('id,class_name,niveaux(niveau)')
+            .order('created_at', { ascending: false });
+
             /* .select(`
               id,
               class_name,
@@ -146,7 +148,7 @@ const AddClass = ({classes,setClasses}) => {
 
   return (
 
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-6 border-t pt-6'>
     <div className='flex items-center gap-4 '>
 
         <Input

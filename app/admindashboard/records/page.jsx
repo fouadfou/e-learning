@@ -164,7 +164,7 @@ const Page = () => {
     
     fetchYears();
   }, [getToken])
-  console.log("years" , years)
+
   
   const disabledDate = (current) => {
     // Disable all dates which are not in the years array
