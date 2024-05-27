@@ -54,7 +54,7 @@ const HeaderContainer = () => {
             className='h-fit flex flex-col md:flex-row items-center justify-center gap-y-2 gap-x-6'>
           
               <Link  href="/parentSpace" >
-                <Button className='bg-primaryColor text-white'>Suivre votre enfant</Button>
+                <Button className='bg-primaryColor text-white'>commencez maintenant</Button>
               </Link>
 
            

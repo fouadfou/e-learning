@@ -18,6 +18,14 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
     const containerRef = useRef(null);
 
 
+    const scrollToBottom = () => {
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    };
+
+
+
 
     useEffect(() => {
         const markMessagesAsSeen = async () => {
@@ -68,11 +76,7 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
                 // Update: Reverse the order of fetched messages before setting state
                 setMessages(data.reverse() || []);
                 // Scroll to the bottom after initial messages are loaded
-                setTimeout(() => {
-                    if (containerRef.current) {
-                        containerRef.current.scrollTop = containerRef.current.scrollHeight;
-                    }
-                }, 0);
+                scrollToBottom();
             } catch (error) {
                 console.error('Error fetching messages:', error.message);
             }
@@ -119,11 +123,7 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
                                     return prevMessages;
                                 });
                                 
-                                setTimeout(() => {
-                                    if (containerRef.current) {
-                                        containerRef.current.scrollTop = containerRef.current.scrollHeight;
-                                    }
-                                }, 0);
+                                scrollToBottom();
                             }
                         
                     })
@@ -158,11 +158,7 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
       /*       setMessages([...messages, inputValue]); */
             setInputValue('');
             // Scroll to the bottom after sending a message
-            setTimeout(() => {
-                if (containerRef.current) {
-                    containerRef.current.scrollTop = containerRef.current.scrollHeight;
-                }
-            }, 0);
+            scrollToBottom();
         } catch (error) {
             console.error('Error sending message:', error.message);
         }
