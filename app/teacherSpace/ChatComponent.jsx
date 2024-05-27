@@ -20,10 +20,11 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
 
     const scrollToBottom = () => {
         if (containerRef.current) {
-            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+            setTimeout(() => {
+                containerRef.current.scrollTop = containerRef.current.scrollHeight;
+            }, 0);
         }
     };
-
 
 
 
