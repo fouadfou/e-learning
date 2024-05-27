@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef  , useLayoutEffect} from 'react';
 import { supabaseClient } from '@/app/utils/supabaseClient';
 import { IoSend } from "react-icons/io5";
 import { useAuth } from '@clerk/nextjs';
@@ -20,11 +20,14 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
 
     const scrollToBottom = () => {
         if (containerRef.current) {
-            setTimeout(() => {
-                containerRef.current.scrollTop = containerRef.current.scrollHeight;
-            }, 0);
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
         }
     };
+
+    useLayoutEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
 
 
 
@@ -77,7 +80,7 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
                 // Update: Reverse the order of fetched messages before setting state
                 setMessages(data.reverse() || []);
                 // Scroll to the bottom after initial messages are loaded
-                scrollToBottom();
+                
             } catch (error) {
                 console.error('Error fetching messages:', error.message);
             }
@@ -124,7 +127,7 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
                                     return prevMessages;
                                 });
                                 
-                                scrollToBottom();
+                                
                             }
                         
                     })
@@ -159,7 +162,7 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
       /*       setMessages([...messages, inputValue]); */
             setInputValue('');
             // Scroll to the bottom after sending a message
-            scrollToBottom();
+            
         } catch (error) {
             console.error('Error sending message:', error.message);
         }
