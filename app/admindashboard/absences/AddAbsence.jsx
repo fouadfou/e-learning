@@ -73,7 +73,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
       }
     };
   
-    fetchStudentByNumber();
+    num_student !=="" && fetchStudentByNumber();
   }, [num_student, getToken]);
 
 
@@ -84,17 +84,23 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
         const supabase = await supabaseClient(token);
         const { data, error } = await supabase
           .from('matiere_ensg')
-          .select('ensg_id , ensg(user_id , users(nom, prenom))')
-          .eq('matiere_id', selectedMatiere.id);
+          .select('ensg_id ')
+          .eq('matiere_id', selectedMatiere.id)
+          .eq('class_id', selectedStudent.class_id);
+          /* .select('ensg_id , ensg(user_id , users(nom, prenom))') */
+          
 
-        const CombinationObjects = data.map(item => ({
+     /*    const CombinationObjects = data.map(item => ({
           ensg_id: item.ensg_id,
           nom: item.ensg.users.nom,
           prenom: item.ensg.users.prenom,
         }));
+ */
 
-        
-        setTeachers(CombinationObjects);
+        setSelectedTeacher(data[0].ensg_id);
+
+        /* 
+        setTeachers(CombinationObjects); */
       } catch (error) {
         console.error('Error fetching teacher:', error.message);
       }
@@ -113,7 +119,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
         .insert({
           eleve_id: selectedStudent.user_id,
           matiere_id: selectedMatiere.id,
-          ensg_id: selectedTeacher.id,
+          ensg_id: selectedTeacher,
           date_abs: timeSelected,
           class_id: selectedStudent.class_id,
           /* description:`Votre enfant, ${selectedStudent.nom} ${selectedStudent.prenom}, est absent lors du cours de ${selectedMatiere.matiere_name} 
@@ -139,6 +145,8 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
   };
   return (
     <div >
+      <h1 className='font-bold text-xl w-full mb-6'>Ajouter une absence</h1>
+
           <form className="flex flex-wrap items-center gap-4" onSubmit={addAbsence}>
         <Input
           size="sm"
@@ -152,7 +160,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
           isRequired
         />
         <DatePicker placeholder="Date d'absence" showTime onChange={(_, dateStr) => setTimeSelected(dateStr)} />
-        <Select radius="lg" size="sm" label="Sélectionnez une matière" className="flex-1 min-w-[12rem]" isRequired>
+        <Select  textValue={selectedMatiere ? selectedMatiere.matiere_name : ''} radius="lg" size="sm" label="Sélectionnez une matière" className="flex-1 min-w-[12rem]" isRequired>
           {matieres.map((matiere, index) => (
             <SelectItem
               isRequired
@@ -165,7 +173,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
             </SelectItem>
           ))}
         </Select>
-        <Select
+       {/*  <Select
           isRequired
           isDisabled={selectedMatiere === ''}
           radius="lg"
@@ -183,7 +191,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
               {teacher.nom} {teacher.prenom}
             </SelectItem>
           ))}
-        </Select>
+        </Select> */}
         <Button className="bg-primaryColor text-white" type="submit">
           {' '}
           Ajouter une absence

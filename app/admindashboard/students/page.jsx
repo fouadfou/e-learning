@@ -6,6 +6,7 @@ import { useAuth } from '@clerk/nextjs';
 import { FiEdit } from "react-icons/fi";
 import Update from './Update';
 
+
 const Page = () => {
   const { getToken } = useAuth();
 
@@ -71,7 +72,7 @@ const Page = () => {
     <div className='p-8 w-full flex flex-col gap-4'>
       <h1 className='font-semibold text-xl'>Liste des élèves</h1>
       <Input
-        placeholder="Search by name"
+        placeholder="Rechercher par nom"
         onChange={(e) => setSearchTerm(e.target.value)}
         className='w-full mb-4'
       />

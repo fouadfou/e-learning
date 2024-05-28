@@ -83,6 +83,7 @@ const JoinClass = ({classes,setClasses}) => {
 
   return (
     <div>
+      <h1 className='font-bold text-xl w-full mb-6'>Ajouter les élèves aux classes </h1>
 
       <div  className='flex items-center gap-4'>
   

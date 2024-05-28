@@ -5,7 +5,8 @@ import { supabaseClient } from '@/app/utils/supabaseClient';
 import { useAuth } from '@clerk/nextjs' */;
 
 import AddClass from './AddClass';
-import JoinClass from './JoinClass';
+import JoinClass from '../class/JoinClass';
+
 
 
 const page = () => {

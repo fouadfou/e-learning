@@ -173,6 +173,8 @@ const Page = () => {
 
   return (
     <div className="flex-1 p-8 flex flex-col gap-4">
+      <h1 className='font-bold text-xl w-full mb-6'>Ajouter les relevés</h1>
+
       <input
         onChange={handleFileChange}
         className="block w-full text-sm file:bg-primaryColor file:p-2 file:px-4  file:border-0  file:text-white text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

@@ -129,6 +129,9 @@ const JoinMatieres = ({ getToken, matieres}) => {
       };
 
   return (
+    <div>
+      <h1 className='font-bold text-xl w-full mb-6'>Attribution des matières et des enseignants dans les salles de classe</h1>
+
     <form onSubmit={joinSubject} className='border-b-[1px] pb-8'>
     <div className='flex flex-wrap items-center gap-4'>
          <Select 
@@ -211,6 +214,7 @@ const JoinMatieres = ({ getToken, matieres}) => {
         <Button type="submit"  className='bg-primaryColor text-white mt-4'>Ajouter</Button>
 
     </form>
+    </div>
   )
 }
 

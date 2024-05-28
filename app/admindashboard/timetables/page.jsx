@@ -8,6 +8,8 @@ import FileUpload from './FileUpload'
 const page = () => {
   return (
     <div className="flex-1 p-8 flex flex-col gap-8">
+      <h1 className='font-bold text-xl w-full '>Ajouter les emplois du temps</h1>
+
          <UploadImage />
         
     </div>

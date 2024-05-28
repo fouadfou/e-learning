@@ -148,7 +148,9 @@ const adminLayout = ({children , pageProps}) => {
       ) : (
         <div className="flex">
           <DashboardSidebar  listElements={listElements} />
+          
           {children}
+          
         </div>
       )}
     </>

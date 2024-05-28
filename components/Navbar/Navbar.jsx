@@ -112,7 +112,7 @@ const Navbar = () => {
                       }`}
                       key={id}
                     >
-                      {title === "Space" ? `${userRole} ${title}` : title}
+                      {title !== "Space" ?  title : userRole === 'Teacher' ? "EspaceEnseignant" : userRole ==="Parent" ?"Espace Parent":"" }
                     </Link>
                   </li>
                 ))}

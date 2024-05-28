@@ -128,7 +128,7 @@ const Page = () => {
   return (
     <div className="flex-1 p-8 flex flex-col gap-4">
       
-      <h2 className="text-xl font-semibold">Connect Parent with Child</h2>
+      <h2 className="text-xl font-semibold">Lier les enfants à leurs parents</h2>
 
       <div className="flex flex-col gap-3">
         <Input

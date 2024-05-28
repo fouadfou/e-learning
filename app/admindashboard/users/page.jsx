@@ -8,7 +8,7 @@ const page = () => {
 
   
   return (
-    <div>
+    <div  >
         <TableData>
           <ActionButton />
         </TableData>

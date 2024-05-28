@@ -229,7 +229,7 @@ const TableData = ({children}) => {
 
   const topContent = useMemo(() => {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4  pr-4">
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
