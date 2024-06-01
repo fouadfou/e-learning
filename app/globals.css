@@ -63,3 +63,6 @@ body{
   background-color: #f44336 !important;
 }
 
+.button-nextui {
+    z-index:30 !important;
+}

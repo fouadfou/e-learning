@@ -184,7 +184,7 @@ const Page = () => {
        
     <div className='flex flex-wrap  gap-4'>
 
-        <Input textValue={title} onBlur={(e) => setTitle(e.target.value)} className='w-fit' type="text" size="sm" label="title" />
+        <Input textValue={title} onBlur={(e) => setTitle(e.target.value)} radius='lg' className='w-fit' type="text" size="sm" label="Entrez le titre" />
 
         <Select
         radius="lg"

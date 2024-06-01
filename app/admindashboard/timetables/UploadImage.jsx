@@ -23,7 +23,7 @@ const getBase64 = (file) =>
         const [fileList, setFileList] = useState([]);
         const [previewImage, setPreviewImage] = useState('');
         const [classes , setClasses] = useState([]);
-        const [selectedClass , setSelectedClass] = useState(null);
+        const [selectedClass , setSelectedClass] = useState('');
 
 
         useEffect(() => {
@@ -40,6 +40,20 @@ const getBase64 = (file) =>
                     from("class")
                     .select("*")
 
+
+                    data.sort((a, b) => {
+                      const regex = /\d+/g; // Regular expression to match all numbers in the class name
+                      const aNumbers = a.class_name.match(regex).map(Number);
+                      const bNumbers = b.class_name.match(regex).map(Number);
+              
+                      // Compare the first numbers
+                      if (aNumbers[0] !== bNumbers[0]) {
+                        return aNumbers[0] - bNumbers[0];
+                      }
+              
+                      // If first numbers are equal, compare the last numbers
+                      return aNumbers[aNumbers.length - 1] - bNumbers[bNumbers.length - 1];
+                    });
                     setClasses(data)
                     
                 } catch (error) {
@@ -122,7 +136,7 @@ const getBase64 = (file) =>
                 .update({ emplois_du_temps: imageUrl.publicUrl.toString() })
                 .eq("id", selectedClass.id);
           
-              setSelectedClass(null);
+              setSelectedClass('');
               setFileList([]);
               setPreviewImage('');
           
@@ -142,6 +156,7 @@ const getBase64 = (file) =>
   size="sm"
   label="Sélectionnez une classe"
   className="max-w-xs"
+  value={selectedClass || ''}
 
 >
   {classes.map((classe, index) => (

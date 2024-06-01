@@ -8,7 +8,7 @@ const page = () => {
 
   
   return (
-    <div  >
+    <div  className="flex-1 p-8 " >
         <TableData>
           <ActionButton />
         </TableData>

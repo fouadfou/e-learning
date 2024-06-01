@@ -136,7 +136,7 @@ const page = () => {
 
  
   return (
-    <div className='flex flex-col gap-8  '>
+    <div className='flex flex-col gap-8 z-40  '>
 
    
     <Button size='sm'  onPress={onOpen} className='bg-primaryColor text-white' endContent={<GoPlus />}>
@@ -151,7 +151,7 @@ const page = () => {
       >
         <ModalContent>
           <form onSubmit={createHomework}>
-            <ModalHeader className="flex flex-col gap-1">Devoir</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1">Ajouter un devoir</ModalHeader>
             <ModalBody>
      
     <div className='flex flex-col gap-4'>
@@ -160,7 +160,7 @@ const page = () => {
           isRequired
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Entrez le titre du devoir"
+          placeholder="Entrez le titre"
         />
 
       <Textarea
@@ -246,7 +246,7 @@ const page = () => {
               <Button color="danger" variant="light" onPress={onClose}>
                 Fermer
               </Button>
-              <Button type='submit' className='bg-primaryColor text-white' onSubmit={createHomework}>Publier</Button>
+              <Button type='submit' className='bg-primaryColor text-white' onSubmit={createHomework}>Ajouter</Button>
             </ModalFooter>
           </form>
         </ModalContent>

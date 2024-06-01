@@ -4,7 +4,7 @@ import {AnimatePresence, motion } from 'framer-motion'
 import { supabaseClient } from '../utils/supabaseClient'
 import { AiFillMessage } from "react-icons/ai";
 import ChatComponent from './ChatComponent';
-import { Button } from '@nextui-org/react';
+import { Button , Card ,CardBody} from '@nextui-org/react';
 import { IoPersonAddSharp } from "react-icons/io5";
 
 
@@ -316,18 +316,19 @@ const ChatList = ({showChatList , getToken , userId , setMessages_sent}) => {
                         style={{ boxShadow: "rgba(0, 0, 0, 0.10) 0px 3px 4px" }}
                         className="absolute z-50 flex flex-col w-fit overflow-auto max-h-[calc(75vh)] bottom-14 right-0 bg-white rounded-xl border"
                     >
-                        <h1 className='w-full text-sm bg-[#5A5A5A] text-gray-100 rounded-t-xl p-2 text-center'>Teachers</h1>
+          
+                        <h1 className='w-full text-sm bg-[#5A5A5A] text-gray-100 rounded-t-xl p-2 text-center'>Enseignants</h1>
                         <div>
                           <div className='flex p-1 px-2 border-b gap-2'>
                             <input onChange={(e) => handleInputChange(e.target.value)} type="text" className='border rounded-lg placeholder:text-[12px] px-2' placeholder='Recherche par nom' />
-                            <Button size="sm" className='bg-primaryColor text-white w-fit'>Ajouter</Button>
+                            <Button size="sm" className='button-nextui bg-primaryColor text-white w-fit'>Ajouter</Button>
                           </div>
     
                           <ul>
                           {filteredTeachers.map((teacher , index) => (
                   <li key={index} className='flex text-[13px] p-2 bg-grayBg  justify-between'>
                     {teacher.nom} {teacher.prenom}
-                    <IoPersonAddSharp onClick={() => addTeacher(teacher.user_id ,teacher)} className='text-primaryColor cursor-pointer' />
+                    <IoPersonAddSharp onClick={() => addTeacher(teacher.user_id ,teacher)} className='button-nextui text-primaryColor cursor-pointer' />
                   </li>
                 ))}
                           </ul>
@@ -350,7 +351,7 @@ const ChatList = ({showChatList , getToken , userId , setMessages_sent}) => {
                                 {openChats[teacher.user_id] && <ChatComponent openChats={openChats}  messages_teacher={msgNotseen.filter((msg) => msg.sender_id === teacher.user_id)}  setMessages_sent={setMessages_sent} setTeachers={setTeachers} teacher_id={teacher.user_id} />}
                             </li>
                         ))}
-                    </motion.ul>
+                    </motion.ul >
                 )}
             </AnimatePresence>
       )

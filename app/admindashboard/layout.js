@@ -59,11 +59,11 @@ const listElements = [
     icon: <FaCalendarAlt  />,
     link: "/year"
 },
-{
+/* {
   name: 'Trimestres',
   icon: <MdOutlineFormatListNumberedRtl   />,
   link: "/trimester"
-},
+}, */
 
 {
   name: 'emplois du temps',

@@ -4,7 +4,7 @@ import { supabaseClient } from '../utils/supabaseClient';
 import { FaChild } from "react-icons/fa6";
 
 
-const fetchDevoir = ({getToken , childrens , notifiedPages}) => {
+const fetchDevoir = ({getToken , childrens }) => {
 
   const [HomeWorks , setHomeWorks] = useState([]);
 

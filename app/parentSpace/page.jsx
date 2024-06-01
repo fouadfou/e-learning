@@ -52,7 +52,8 @@ const page = () => {
 
     useEffect(() => {
       const fetchDataNotSeen = async () => {
-        const notesArray = [];
+
+        const pages = [];
   
         for (const child of childrens) {
           try {
@@ -77,24 +78,26 @@ const page = () => {
             .eq('class_id', child.class_id)
             .eq('seen', false);
 
-            const pages = [];
+
+            
           if (notesData && notesData.length > 0) {
             pages.push('notes');
           }
           if (devoirsData && devoirsData.length > 0) {
             pages.push('devoirs');
           }
-          setNotifiedPages(pages);
+          
   
-        
           } catch (error) {
             console.error('Error fetching notes:', error.message);
           }
         }
+
+        setNotifiedPages(pages);
       };
   
       fetchDataNotSeen();
-    }, [childrens, getToken]);
+    }, [childrens, parent,userId]);
 
     
 
@@ -197,7 +200,7 @@ const page = () => {
     };
 
 
- 
+
     useEffect(() => {
       const subscribeToNewMessages = async () => {
         try {

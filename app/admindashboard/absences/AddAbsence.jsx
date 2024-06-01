@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Select, SelectItem, Button, Input } from '@nextui-org/react';
+import moment from 'moment';
+import { Select, SelectItem, Button, Input  , Textarea} from '@nextui-org/react';
 import { supabaseClient } from '@/app/utils/supabaseClient';
 import { DatePicker } from 'antd';
 
-const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
+
+const AddAbsence = ({getToken ,setFatchAbsencesBool }) => {
 
 
   const [num_student, setNum_student] = useState('');
   const [selectedStudent, setSelectedStudent] = useState('');
   const [errorStudent, setErrorStudent] = useState(false);
   const [timeSelected, setTimeSelected] = useState('');
+  const [descriptionContent, setDescriptionContent] = useState('');
 
-  const [selectedMatiere, setSelectedMatiere] = useState('');
+/*   const [selectedMatiere, setSelectedMatiere] = useState('');
   const [matieres, setMatieres] = useState([]);
 
   const [selectedTeacher, setSelectedTeacher] = useState('');
-  const [teachers, setTeachers] = useState([]);
-
+  const [teachers, setTeachers] = useState([]); 
 
   useEffect(() => {
     const fetchMatiers = async () => {
@@ -32,7 +34,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
     };
 
     fetchMatiers();
-  }, [getToken]);
+  }, [getToken]); */
 
 
   useEffect(() => {
@@ -77,7 +79,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
   }, [num_student, getToken]);
 
 
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchTeachers = async () => {
       try {
         const token = await getToken({ template: 'supabase' });
@@ -87,30 +89,21 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
           .select('ensg_id ')
           .eq('matiere_id', selectedMatiere.id)
           .eq('class_id', selectedStudent.class_id);
-          /* .select('ensg_id , ensg(user_id , users(nom, prenom))') */
-          
-
-     /*    const CombinationObjects = data.map(item => ({
-          ensg_id: item.ensg_id,
-          nom: item.ensg.users.nom,
-          prenom: item.ensg.users.prenom,
-        }));
- */
-
+      
         setSelectedTeacher(data[0].ensg_id);
 
-        /* 
-        setTeachers(CombinationObjects); */
       } catch (error) {
         console.error('Error fetching teacher:', error.message);
       }
     };
 
     selectedMatiere !== '' && fetchTeachers();
-  }, [selectedMatiere, getToken]);
+  }, [selectedMatiere, getToken]); */
 
-  const addAbsence = async e => {
+  const addAbsence = async (e) => {
+
     e.preventDefault();
+
     try {
       const token = await getToken({ template: 'supabase' });
       const supabase = await supabaseClient(token);
@@ -118,31 +111,29 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
         .from('absence')
         .insert({
           eleve_id: selectedStudent.user_id,
-          matiere_id: selectedMatiere.id,
-          ensg_id: selectedTeacher,
           date_abs: timeSelected,
-          class_id: selectedStudent.class_id,
-          /* description:`Votre enfant, ${selectedStudent.nom} ${selectedStudent.prenom}, est absent lors du cours de ${selectedMatiere.matiere_name} 
-          enseigné par M.${selectedTeacher.nom} ${selectedTeacher.prenom} ` */
+          description: descriptionContent,
         });
-      
 
 
-        setFatchAbsencesBool(prevState => !prevState)
-
+      setFatchAbsencesBool(prev => !prev);
       // Reset the form
       setNum_student('');
       setSelectedStudent('');
       setErrorStudent(false);
       setTimeSelected('');
-      setSelectedMatiere('');
-      setSelectedTeacher('');
+      setDescriptionContent('');
+     /*  setSelectedMatiere('');
+      setSelectedTeacher(''); */
 
 
     } catch (error) {
       console.error('Error add absence:', error.message);
     }
   };
+
+
+  console.log("description", descriptionContent)
   return (
     <div >
       <h1 className='font-bold text-xl w-full mb-6'>Ajouter une absence</h1>
@@ -159,7 +150,22 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
           className="w-fit"
           isRequired
         />
-        <DatePicker placeholder="Date d'absence" showTime onChange={(_, dateStr) => setTimeSelected(dateStr)} />
+        <DatePicker value={timeSelected !== "" ? moment(timeSelected) : ""}   required placeholder="Date d'absence" showTime onChange={(_, dateStr) => setTimeSelected(dateStr)} />
+
+
+       <Textarea
+
+      label="Description"
+      placeholder="Enter your description"
+      className="max-w-xs"
+      onChange={(e) => setDescriptionContent(e.target.value)}
+      isRequired
+      value={descriptionContent}
+
+    />
+       
+       {/* 
+       
         <Select  textValue={selectedMatiere ? selectedMatiere.matiere_name : ''} radius="lg" size="sm" label="Sélectionnez une matière" className="flex-1 min-w-[12rem]" isRequired>
           {matieres.map((matiere, index) => (
             <SelectItem
@@ -173,7 +179,7 @@ const AddAbsence = ({getToken ,setFatchAbsencesBool}) => {
             </SelectItem>
           ))}
         </Select>
-       {/*  <Select
+       <Select
           isRequired
           isDisabled={selectedMatiere === ''}
           radius="lg"

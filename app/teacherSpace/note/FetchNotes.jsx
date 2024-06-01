@@ -61,6 +61,8 @@ const FetchNotes = ({click }) => {
         .from('notes')
         .delete()
         .eq("id",note_id)
+        .order('created_at', { ascending: false });
+        
         
         setNotes(prevNotes => prevNotes.filter(note => note.id !== note_id));
         

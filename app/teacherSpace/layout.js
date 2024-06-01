@@ -51,7 +51,6 @@ const teacherLayout = ({ children }) => {
     const [ messages_sent, setMessages_sent] = useState(false); 
 
 
-    
 
     return ( 
        

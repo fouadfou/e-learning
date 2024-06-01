@@ -57,11 +57,16 @@ export async function POST(req) {
         from: 'soheibtalhi0@gmail.com', // Your name and email address
         to: email.parent_email,  // Recipient's email address
         subject: "Absence", // Subject line
-        html: ` <div className='flex flex-col gap-3'>
+       /*  html: ` <div className='flex flex-col gap-3'>
         <h1 className='text-xl font-bold'>Votre enfant est absent</h1>
         <p>Votre enfant, <b>"${absence.eleve_nom} ${absence.eleve_prenom}"</b>, est absent lors du cours de <b>"${absence.matiere_name}"</b> enseigné par <b>"M. ${absence.ensg_nom} ${absence.ensg_prenom}"</b></p>
         <p><b>Date de l'absence : </b>${absence.date_abs}</p>
-        </div>`, // Plain text body
+        </div>`, // Plain text body */
+        html: ` <div className='flex flex-col gap-3'>
+        <h1 className='text-xl font-bold'>Votre enfant est absent</h1>
+        <p>${absence.description}</p>
+        <p><b>Date de l'absence : </b>${absence.date_abs}</p>
+        </div>`,
       });
 
       console.log('Message sent: %s', info.messageId);

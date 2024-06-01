@@ -4,6 +4,7 @@ import {  Button } from '@nextui-org/react';
 import { FiEdit } from "react-icons/fi";
 
 
+
 const FatchDevoir = ({fetchHomeWork ,userId ,getToken}) => {
 
     const [HomeWorks , setHomeWorks] = useState([]);
@@ -17,6 +18,8 @@ const FatchDevoir = ({fetchHomeWork ,userId ,getToken}) => {
             .from('devoir')
             .select('*,matiere(matiere_name) , class(class_name)')
             .eq('ensg_id', userId)
+            .order('created_at', { ascending: false });
+
 
     
           if (error) {
@@ -82,9 +85,9 @@ const FatchDevoir = ({fetchHomeWork ,userId ,getToken}) => {
                             <p><span className='font-medium text-danger-600'>Date fin :</span> {homework.date_fin}</p>
 
                            </div>
-                           <div className='flex gap-3'>
-                           <Button c onClick={()=>deleteHomeWork(homework.id)} size='sm' className='flex-1 bg-[#F9494B] text-white'>Delete HomeWork</Button>
-                           <Button size='sm' > <FiEdit /></Button>
+                           <div className='flex gap-3 text-[12px]'>
+                           <button onClick={()=>deleteHomeWork(homework.id)}  className='flex-1 p-2 rounded-lg bg-[#F9494B] text-white'>Delete HomeWork</button>
+                           <button className=' hover:bg-gray-200 duration-200 p-2 px-3 rounded-lg bg-grayBg border-[1.5px] '> <FiEdit /></button>
                            </div>
                         </li>
                     ))}

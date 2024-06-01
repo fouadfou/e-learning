@@ -20,8 +20,8 @@ const ChatComponent = ({ teacher_id ,openChats ,messages_teacher }) => {
 
     const scrollToBottom = () => {
         if (containerRef.current) {
-       
-            containerRef.current.scrollTop = 164; 
+
+            containerRef.current.scrollTop = containerRef.current.scrollHeight; 
         }
     };
 
