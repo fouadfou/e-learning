@@ -88,7 +88,7 @@ const ContactUs = () => {
             type="submit" 
             className="w-full py-2 px-4 text-sm  bg-[#28B463] text-white rounded-lg hover:bg-[#239d57] outline-none focus:border-white  focus:ring-[1.5px] focus:ring-[#b7eacd]"
           >
-            Send Message
+            Envoyer le message
           </button>
         </form>
         {status && <p className={`mt-2 text-sm text-center ${status.includes('successfully') ? 'text-green-600' : 'text-red-600'}`}>{status}</p>}
