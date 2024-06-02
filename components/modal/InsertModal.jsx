@@ -9,9 +9,10 @@ import { FaEye ,FaEyeSlash  } from "react-icons/fa";
 
 
 const roles = [
-  { label: "Élève", value: "Teacher" },
+  { label: "enseignante", value: "Teacher" },
   { label: "Parent", value: "Parent" },
-  { label: "enseignante", value: "Student" },
+  { label: "Élève", value: "Student" },
+  
 ];
 
 
