@@ -41,11 +41,11 @@ export const navBarList = [
     link: "Space",
   },
   
-  {
+/*   {
     id: 1003,
     title: "À propos",
     link: "/about",
-  },
+  }, */
   {
     id: 1004,
     title: "Contactez-nous",
