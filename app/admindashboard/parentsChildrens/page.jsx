@@ -13,6 +13,7 @@ const Page = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [errorStudent, setErrorStudent] = useState(false);
   const [errorParent, setErrorParent] = useState(false);
+  const [listParentEnfant, setListParentEnfant] = useState([]);
 
 
   useEffect(() => {
@@ -97,9 +98,6 @@ const Page = () => {
   const handleSubmit = async () => {
     try {
 
-      console.log("selectedParent",selectedParent)
-      console.log("selectedStudent",selectedStudent)
-      
       const token = await getToken({ template: 'supabase' });
       const supabase = await supabaseClient(token);
       const { data: fetchParent, error: errorfetchedParent } = await supabase
@@ -123,6 +121,39 @@ const Page = () => {
       // Handle error here
     }
   };
+
+
+  useEffect(() => {
+    const fetchParentEnfant = async() => {
+      try {
+
+        const token = await getToken({ template: 'supabase' });
+        const supabase = await supabaseClient(token);
+        const { data, error } = await supabase
+          .from('parent_eleve')
+          .select('* , eleve(user_id,users(nom,prenom)),parent(user_id,users(nom,prenom))')
+
+        
+          const formattedData = data.map(item => ({
+            id:item.id,
+            parent_nom: item.parent.users.nom,
+            parent_prenom: item.parent.users.prenom,
+            eleve_nom: item.eleve.users.nom,
+            eleve_prenom: item.eleve.users.prenom,
+            
+          })).sort((a, b) => a.parent_nom.localeCompare(b.parent_nom));;
+
+        setListParentEnfant(formattedData)
+
+
+      } catch (error) {
+        
+      }
+    }
+
+    fetchParentEnfant();
+  }, [])
+  
 
 
   return (
@@ -180,7 +211,28 @@ const Page = () => {
         {(errorParent && parentUsername !== '') && <p className="text-red-600">Nous n'avons pas trouvé de parent avec ce nom d'utilisateur</p>}
       </div>
 
-      <Button onClick={handleSubmit} className="bg-primaryColor text-white">Relier le parent et l'enfant</Button>
+      <Button size='sm' onClick={handleSubmit} className="bg-primaryColor text-white">Relier le parent et l'enfant</Button>
+
+      <h2 className="text-xl font-semibold mt-2">Liste parents/enfants</h2>
+
+      <div className='flex gap-4'>
+      <Input size='sm' placeholder='Rechercher parent'/>
+      <Input size='sm' placeholder='Rechercher enfant'/>
+      </div>
+<ul className='border border-gray-300 rounded-lg'>
+  {listParentEnfant.map((relation, index) => (
+    <li key={index} className='border-b border-gray-300 p-4 flex gap-6 items-center'>
+     
+        <p className='text-gray-700'><b>Parent :</b> {relation.parent_nom} {relation.parent_prenom}</p>
+        /
+        <p className='text-gray-700'><b>Élève :</b> {relation.eleve_nom} {relation.eleve_prenom}</p>
+
+    </li>
+  ))}
+</ul>
+      
+
+
     </div>
   );
 };

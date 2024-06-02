@@ -34,7 +34,7 @@ const Page = () => {
         student_num: item.num_eleve,
         student_nom: item.users.nom,
         student_prenom: item.users.prenom,
-        class_name: item.class.class_name,
+        class_name: item.class ? item.class.class_name : 'Pas de classe',
       }));
 
       const sortedData = formattedData.sort((a, b) => a.student_nom.localeCompare(b.student_nom));
