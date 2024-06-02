@@ -14,6 +14,7 @@ const Page = () => {
   const [errorStudent, setErrorStudent] = useState(false);
   const [errorParent, setErrorParent] = useState(false);
   const [listParentEnfant, setListParentEnfant] = useState([]);
+  const [insert , setInsert] = useState(false)
 
 
   useEffect(() => {
@@ -114,6 +115,10 @@ const Page = () => {
         // Handle error here
         return;
       }
+
+      setInsert(prev => !prev);
+      setNum_student('');
+      setParentUsername('');
   
       // Success message or any further action
     } catch (error) {
@@ -152,7 +157,7 @@ const Page = () => {
     }
 
     fetchParentEnfant();
-  }, [])
+  }, [insert])
   
 
 
@@ -172,7 +177,7 @@ const Page = () => {
           labelPlacement="inside"
         />
 
-        {selectedStudent && (
+        {(selectedStudent && num_student!=="" ) &&(
           <div className="flex gap-6">
             <p>
               <span className="font-medium">Nom :</span> {selectedStudent.nom}
@@ -197,7 +202,7 @@ const Page = () => {
           labelPlacement="inside"
         />
 
-    {selectedParent && (
+    {(selectedParent && parentUsername !=="") && (
               <div className="flex gap-6">
                 <p>
                   <span className="font-medium">Nom :</span> {selectedParent.nom}
