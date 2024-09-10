@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --swiper-pagination-color: #000;
+}
+
+body{
+  overflow-x: hidden;
+}
+
+.header-right {
+  background:url("../public/images/Frame 10.png");
+  background-size: cover;
+  background-position:center;
+  
+
+}
+
+.header-left {
+  background:url("../public/images/Frame 11.png");
+  background-size: cover;
+  
+}
+
+.header-container {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      140deg,
+     /*  #E9E5FF    30% */
+      #f7f9f7 10%, 
+      transparent 40%,
+      #f7f9f7 80% 
+    ), 
+
+    url("../public/images/Frame 2.png");
+    background-size: cover;
+    background-position:center;
+    
+}
+
+.logos{
+  -webkit-mask-image: linear-gradient(0deg,transparent,#fff 20%);
+  mask-image: linear-gradient(0deg,transparent,#fff 20%);
+}
+
+.toast-body {
+  background-color: #323232 !important;
+  border-radius: 8px !important;
+
+}
+
+.toast-success {
+  background-color: #4caf50 !important;
+}
+
+.toast-error {
+  background-color: #f44336 !important;
+}
+
+.button-nextui {
+    z-index:30 !important;
+}
