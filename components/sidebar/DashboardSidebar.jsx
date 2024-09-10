@@ -22,7 +22,7 @@ const DashboardSidebar = ({ listElements, userShow, role }) => {
       {/* Toggle Button for Small Screens */}
 
       <Link href='/'
-        className=" md:hidden fixed top-2 right-2  bg-primaryColor text-white p-2  rounded-full shadow-lg">
+        className=" md:hidden fixed top-2 right-2 z-30  bg-primaryColor text-white p-2  rounded-full shadow-lg">
         <IoIosCloseCircle className="text-lg" />
       </Link>
 

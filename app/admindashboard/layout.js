@@ -149,7 +149,7 @@ const adminLayout = ({children , pageProps}) => {
         <div className="flex">
           <DashboardSidebar  listElements={listElements} />
           
-          <div className="md:w-[calc(100%-14rem)] md:ml-[14rem] w-full  md:p-6 p-6 pt-14">
+          <div className="md:w-[calc(100%-14rem)]  md:ml-[14rem] w-full   md:p-6 p-6 pt-14">
           {children}
           </div>
         </div>
